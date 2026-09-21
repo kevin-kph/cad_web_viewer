@@ -1,0 +1,38 @@
+import { Box, Color, Point3 } from '@ts3d-hoops/common';
+import { Axis, NodeId } from '../types';
+import { ICuttingSection } from './ICuttingSection';
+import { IWebViewer } from './IWebViewer';
+export interface ICuttingManager {
+    readonly viewer: IWebViewer;
+    activateCuttingSections(): Promise<void>;
+    clearAllCuttingSections(): Promise<void>;
+    createReferenceGeometryFromAxis(axis: Axis, modelBounding: Box): Point3[];
+    createReferenceGeometryFromFaceNormal(normal: Point3, position: Point3, modelBounding: Box): Point3[];
+    deactivateAllCuttingSections(): Promise<void>;
+    delayCapping(): void;
+    enableCappingIdleCallback(enable: boolean): Promise<boolean>;
+    fromJson(json: any): Promise<void>;
+    getActiveCuttingSectionCount(): number;
+    getCappingFaceColor(): Color | null;
+    getCappingGeometryVisibility(): boolean;
+    getCappingLineColor(): Color | null;
+    getCuttingSection(index: number): ICuttingSection | null;
+    getCuttingSectionCapacity(): number;
+    getCuttingSectionCount(): number;
+    getCuttingSectionFromNodeId(nodeId: NodeId | null): ICuttingSection | null;
+    getStandinGeometryPickable(): boolean;
+    getNodesWithCapping(): Promise<NodeId[]>;
+    hasActiveCuttingSection(): boolean;
+    refreshPlaneGeometry(): Promise<void>;
+    setCappingDelay(delayInMilliseconds: number): void;
+    setCappingFaceColor(color: Color | null): Promise<void>;
+    setCappingGeometryVisibility(cappingGeometryVisibility: boolean): Promise<void>;
+    setCappingLineColor(color: Color | null): Promise<void>;
+    setCuttingPlaneColor(color: Color): Promise<void>;
+    setStandinGeometryPickable(pickable: boolean): Promise<void>;
+    toJson(): object;
+    waitForCappingIdle(): Promise<void>;
+    _init(): void;
+    _isInitialized(): boolean;
+    _setStandinGeometryVisible(visible: boolean): void;
+}

@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>Focus Input Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      td.header {
+        vertical-align: top;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      textarea {
+        width: 95%;
+        height: 200px;
+      }
+
+      .example-canvas-small:focus {
+        outline: thick;
+      }
+
+      button {
+        margin-right: 3px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/focus_input.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <p>
+      This example demonstrates having multiple viewers on a single page and managing keyboard input
+      between the two.
+    </p>
+    <table>
+      <tr>
+        <td class="header">Viewer 1</td>
+        <td class="header">Viewer 2</td>
+      </tr>
+      <tr>
+        <td>
+          <div id="viewerContainer1" class="example-canvas-small"></div>
+        </td>
+        <td>
+          <div id="viewerContainer2" class="example-canvas-small"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <button id="focusViewer1">Focus keyboard events</button
+            ><button id="blurViewer1">Blur keyboard events</button
+            ><button id="clearLog1">Clear Log</button>
+          </div>
+          <div><textarea id="log1Text"></textarea></div>
+        </td>
+        <td>
+          <div>
+            <button id="focusViewer2">Focus keyboard events</button
+            ><button id="blurViewer2">Blur keyboard events</button
+            ><button id="clearLog2">Clear Log</button>
+          </div>
+          <div><textarea id="log2Text"></textarea></div>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <title>Text Insertion Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      body {
+        padding: 10px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/text_insertion.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/utils.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+        </td>
+        <td style="vertical-align: top">
+          <div id="TextInsertionOperatorOptions">
+            <h4>Text Insertion Operator</h4>
+            <div>Select a face on the model to attach a 3D text box with the current settings.</div>
+            <p></p>
+            <div>
+              <label for="textBoxText">Text:</label>
+              <input id="textBoxText" type="text" value="Hello World!" />
+            </div>
+            <p></p>
+            <div>
+              <label for="textBoxTextColor">Text Color: </label>
+              <input type="color" id="textBoxTextColor" value="#000000" />
+            </div>
+            <div>
+              <label for="textBoxTextFontSize">Font Pixel Rendered Size: </label>
+              <input type="number" id="textBoxTextFontSize" step="1" value="64" />
+            </div>
+            <div>
+              <label for="textBoxTextFontSize">Font Pixel Display Size: </label>
+              <input type="number" id="textBoxTextFontDisplaySize" step="1" value="64" />
+            </div>
+            <div>
+              <label for="textBoxTextFont">Font Name: </label>
+              <input type="text" id="textBoxTextFont" value="monospace" />
+            </div>
+            <div>
+              <label for="textBoxScreenOriented">Screen Oriented: </label>
+              <input type="checkbox" id="textBoxScreenOriented" checked="checked" />
+            </div>
+            <div>
+              <label for="textBoxSuppressCameraScale">Suppress Camera Scale: </label>
+              <input type="checkbox" id="textBoxSuppressCameraScale" checked="checked" />
+            </div>
+            <div>
+              <label for="textBoxBackgroundTransparent">Background Transparent: </label>
+              <input type="checkbox" id="textBoxBackgroundTransparent" checked="checked" />
+            </div>
+            <div>
+              <label for="textBoxBackgroundColor">Background Color: </label>
+              <input type="color" id="textBoxBackgroundColor" value="#FFFFFF" />
+            </div>
+            <div>
+              <label for="textBoxUseMipmaps">Use Texture Mipmaps: </label>
+              <input type="checkbox" id="textBoxUseMipmaps" checked="checked" />
+            </div>
+            <p></p>
+            <div>
+              <label for="textBoxBorderLine">Border Line: </label>
+              <input type="checkbox" id="textBoxBorderLine" checked="checked" />
+            </div>
+            <div>
+              <label for="textBoxBorderColor">Border Color: </label>
+              <input type="color" id="textBoxBorderColor" value="#000000" />
+            </div>
+            <p></p>
+            <div>
+              <button id="textBoxClearAll">Clear All</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

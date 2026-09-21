@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <title>Streaming modes Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      table td {
+        vertical-align: top;
+      }
+
+      .streamingMode {
+        display: none;
+        margin-top: 10px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/streaming_modes.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/modelTree.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="viewer" style="display: none">
+      <table>
+        <tr>
+          <td>
+            <div id="modelTree"></div>
+          </td>
+          <td>
+            <div id="viewerContainer" class="example-canvas-small"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="modeSelection">
+      <div>
+        <div>
+          <input
+            id="streamInteractive"
+            type="radio"
+            name="streamingMode"
+            value="1"
+            checked="checked"
+          /><label for="streamInteractive">Interactive Streaming</label>
+        </div>
+        <p>
+          This is the default setting for the viewer. Data will be streamed as it becomes visible
+          based on the viewing frustum. Keyed data with prioirty 0 will not be streamed unless
+          explictly requested. The supporting server process will remain active while the user views
+          the model.
+        </p>
+      </div>
+      <div>
+        <div>
+          <input id="streamAll" type="radio" name="streamingMode" value="2" /><label for="streamAll"
+            >Stream All</label
+          >
+        </div>
+        <p>
+          All data, will be streamed to the client. Priority will be given to data visible based on
+          the view frustum. The supporting server process will terminate once all data has been
+          transfered.
+        </p>
+      </div>
+      <div>
+        <div>
+          <input id="streamOnDemand" type="radio" name="streamingMode" value="4" /><label
+            for="streamOnDemand"
+            >On Demand</label
+          >
+        </div>
+        <p>No data is streamed to the server unless it has been explicitly requested.</p>
+      </div>
+      <div><button id="modeSelectButton">Select</button></div>
+    </div>
+    <div class="streamingMode" id="streamingMode-4">
+      <table>
+        <tr>
+          <td><button id="loadStory1">Load Story 1</button></td>
+          <td><button id="loadStory2">Load Story 2</button></td>
+          <td><button id="loadStory3">Load Story 3</button></td>
+          <td><button id="loadStory4">Load Story 4</button></td>
+        </tr>
+        <tr>
+          <td><button id="loadStory5">Load Story 5</button></td>
+          <td><button id="loadStory6">Load Story 6</button></td>
+          <td><button id="loadStory7">Load Story 7</button></td>
+          <td><button id="loadStory8">Load Story 8</button></td>
+        </tr>
+        <tr>
+          <td><button id="loadStory9">Load Story 9</button></td>
+          <td><button id="loadStory10">Load Story 10</button></td>
+          <td><button id="loadStory11">Load Story 11</button></td>
+          <td><button id="loadStory12">Load Story 12</button></td>
+        </tr>
+        <tr>
+          <td><button id="Foundation">Load Foundation</button></td>
+          <td><button id="Parking 1">Load Parking 1</button></td>
+          <td><button id="Parking 2">Load Parking 2</button></td>
+          <td><button id="Building Skin">Building Skin</button></td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>

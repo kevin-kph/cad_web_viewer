@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Multiple Views Example</title>
+
+
+    <style type="text/css">
+      body {
+        padding: 10px;
+      }
+
+      .hwv-view {
+        position: relative;
+        padding: 3px;
+        margin: 5px;
+        width: 325px;
+        height: 325px;
+        border: 1px solid black;
+      }
+
+      #viewers {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/WebViewer.js"></script>
+    <script type="module" crossorigin src="/scripts/multiView.js"></script>
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div>
+      <button id="createNewView">Create New View</button>
+      <button id="toggleCuttingPlane">Toggle Cutting Plane</button>
+      <button id="hidePart">Hide Selected Part</button>
+      <button id="showAllParts">Show All Parts</button>
+    </div>
+
+    <div id="viewers">
+      <div id="view-panel-0">
+        <div id="view-0" class="hwv-view"></div>
+      </div>
+    </div>
+
+  </body>
+</html>

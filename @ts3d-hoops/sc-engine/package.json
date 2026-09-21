@@ -1,0 +1,18 @@
+{
+  "name": "@ts3d-hoops/sc-engine",
+  "version": "0.0.1",
+  "homepage": "https://techsoft3d.com/",
+  "license": "Proprietary",
+  "type": "module",
+  "module": "./hoops-sc-engine.js",
+  "browser": "./hoops-sc-engine.iife.js",
+  "main": "./hoops-sc-engine.js",
+  "typings": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./hoops-sc-engine.js"
+    },
+    "./engine.esm.wasm": "./engine.esm.wasm"
+  }
+}

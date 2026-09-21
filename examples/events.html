@@ -1,0 +1,272 @@
+<html>
+  <head>
+    <title>Events Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      td {
+        vertical-align: top;
+        padding: 10px;
+      }
+
+      #logText {
+        width: 400px;
+        height: 300px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/events.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/ViewPanel.js">
+    <link rel="modulepreload" crossorigin href="/scripts/viewOrientationBar.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="operatorPanel"></div>
+          <div id="viewPanel"></div>
+        </td>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+          <div id="viewOrientationBar" class="example-div-block"></div>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td>
+          <h3>Log Events:</h3>
+          <table>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="sceneReady"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="sceneReady">sceneReady</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="modelStructureReady"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="modelStructureReady">modelStructureReady</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="modelLoadFailure"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="modelLoadFailure">modelLoadFailure</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="streamingActivated"
+                  class="event-toggle"
+                  checked="checked"
+                />
+                <label for="streamingActivated">streamingActivated</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="streamingDeactivated"
+                  class="event-toggle"
+                  checked="checked"
+                />
+                <label for="streamingDeactivated">streamingDeactivated</label>
+              </td>
+              <td>
+                <input type="checkbox" id="cadViewCreated" class="event-toggle" checked="checked" />
+                <label for="cadViewCreated">cadViewCreated</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" id="camera" class="event-toggle" checked="checked" /><label
+                  for="camera"
+                  >camera</label
+                >
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="transitionBegin"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="transitionBegin">transitionBegin</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="transitionEnd"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="transitionEnd">transitionEnd</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="viewCreated"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="viewCreated">viewCreated</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="viewDeleted"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="viewDeleted">viewDeleted</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="viewLoaded"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="viewLoaded">viewLoaded</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="selection"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="selection">selection</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="contextMenu"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="contextMenu">contextMenu</label>
+              </td>
+              <td>
+                <input type="checkbox" id="info" class="event-toggle" checked="checked" /><label
+                  for="info"
+                  >info</label
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="frameDrawn"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="frameDrawn">frameDrawn</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="timeoutWarning"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="timeoutWarning">timeoutWarning</label>
+              </td>
+              <td>
+                <input type="checkbox" id="timeout" class="event-toggle" checked="checked" /><label
+                  for="timeout"
+                  >timeout</label
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" id="explode" class="event-toggle" checked="checked" /><label
+                  for="explode"
+                  >explode</label
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="addCuttingSection"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="addCuttingSection">addCuttingSection</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="removeCuttingSection"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="removeCuttingSection">removeCuttingSection</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="measurementLoaded"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="measurementLoaded">measurementLoaded</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="measurementValueSet"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="measurementValueSet">measurementValueSet</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  id="measurementCreated"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="measurementCreated">measurementCreated</label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="measurementDeleted"
+                  class="event-toggle"
+                  checked="checked"
+                /><label for="measurementDeleted">measurementDeleted</label>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <div>Log: <button id="clearLog">Clear</button></div>
+          <textarea id="logText"></textarea>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

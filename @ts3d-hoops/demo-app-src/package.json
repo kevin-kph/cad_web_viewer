@@ -1,0 +1,31 @@
+{
+  "name": "ui-demo",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5",
+    "vite": "5.2.9"
+  },
+  "dependencies": {
+    "@ts3d-hoops/ui-kit": "file:../ui-kit",
+    "@ts3d-hoops/ui-kit-react": "file:../ui-kit-react",
+    "@ts3d-hoops/web-viewer-components": "file:../web-viewer-components",
+    "@ts3d-hoops/web-viewer-components-react": "file:../web-viewer-components-react",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "4.3.1",
+    "@xstate/react": "5.0.2",
+    "color-string": "2.0.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-router-dom": "7.15.1",
+    "react-toastify": "11.1.0",
+    "vite-plugin-static-copy": "2.3.1",
+    "xstate": "5.19.2"
+  }
+}

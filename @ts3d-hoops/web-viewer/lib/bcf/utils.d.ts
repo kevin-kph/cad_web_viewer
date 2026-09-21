@@ -1,0 +1,15 @@
+import { Point3, Color } from '@ts3d-hoops/common';
+import { Component } from './types';
+export declare const defaultOriginatingSystem = "HOOPS Visualize Web";
+export declare const compatibleOriginatingSystems: Set<string>;
+export declare function isOriginatingSystemCompatible(originatingSystem: string | undefined): boolean;
+export declare function boolToString(b: boolean): string;
+export declare function exportComponent(doc: XMLDocument, component: Component): HTMLElement;
+export declare function argbStringFromColor(color: Color, alpha: number | undefined): string;
+export declare function appendPoint3(doc: XMLDocument, elem: HTMLElement, p: Point3): void;
+export declare function conditionalSetAttribute(elem: HTMLElement, attrName: string, attrVal: string | undefined | null): void;
+export declare function addElem(doc: XMLDocument, parentElem: HTMLElement, elementName: string, elementContent: string): void;
+export declare function conditionalAddElem(doc: XMLDocument, parentElem: HTMLElement, elementName: string, elementContent: string | undefined | null): void;
+export declare function conditionalDateToString(d: Date | undefined | null): string | null;
+export declare function conditionalNumberToString(n: number | undefined | null): string | null;
+export declare function conditionalBoolToString(b: boolean | undefined | null): string | null;

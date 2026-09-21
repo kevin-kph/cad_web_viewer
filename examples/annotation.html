@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Annotation Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      body {
+        padding: 10px;
+      }
+
+      .markup-key {
+        width: 300px;
+      }
+
+      .markup-label {
+        width: 125px;
+      }
+
+      .markup-action {
+        width: 100px;
+      }
+
+      .instructions {
+        height: 100px;
+        width: 500px;
+        margin-bottom: 30px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/annotation.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+        </td>
+        <td style="vertical-align: top">
+          <div>Select Custom Operator:</div>
+          <select id="customOperatorSelect" size="5">
+            <option value="AnnotationOperator" selected>Annotation Operator</option>
+            <option value="IndicationOperator">Indication Operator</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <div>
+      <div name="AnnotationOperator" class="instructions">
+        <h2>Annotation Operator</h2>
+        Click a Point on the model and drag to create an Annotation.
+      </div>
+      <div name="IndicationOperator" class="instructions" style="display: none">
+        <h2>Indication Operator</h2>
+        <p>Left click points on the model to define a shape. Right click to finalize.</p>
+        <p>
+          <label for="indicationSelector">Shape Type:</label>
+          <select id="indicationSelector">
+            <option value="0">Polygon</option>
+            <option value="1">Line</option>
+          </select>
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h3>Annotation Registry</h3>
+      <table id="AnnotationRegistry">
+        <tr>
+          <td class="markup-key">Key</td>
+          <td class="markup-label">Label</td>
+          <td class="markup-action">Actions</td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>

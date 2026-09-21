@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Textures Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style>
+      table td {
+        vertical-align: top;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/textures.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="viewerContainer" class="example-canvas-small"></div>
+    <div class="example-div-block">
+      In this example, each face of the cube is an instance of a plane. Select an instance, then
+      click one of the buttons below to set the texture for that instance.
+    </div>
+    <div class="example-div-block">Currently selected Id: <span id="selectedId">none</span></div>
+    <div id="textureButtons" class="example-div-block" style="display: none">
+      <div>Apply Texture to Selection:</div>
+
+      <img id="nebulaButton" class="textureButton" src="images/textures/nebula.png" />
+      <img id="bricksButton" class="textureButton" src="images/textures/bricks.png" />
+      <img id="texturedButton" class="textureButton" src="images/textures/textured.png" />
+    </div>
+
+  </body>
+</html>

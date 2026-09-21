@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Shaders</title>
+    <style>
+      main {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+      }
+
+      hoops-web-viewer {
+        width: 50%;
+        height: 100%;
+      }
+
+      section {
+        width: 50%;
+        height: 100%;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/custom_shaders.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/hoops-ifc-relationship.js">
+  </head>
+  <body>
+    <main>
+      <hoops-web-viewer id="viewer" endpointUri="/spheres.scs"></hoops-web-viewer>
+      <section id="shader-panel"></section>
+    </main>
+
+  </body>
+</html>

@@ -1,0 +1,351 @@
+import { Box, Color, Matrix, Matrix12, Matrix16, Plane, Point2, Point3, Ray, Vector3, Vector4 } from '@ts3d-hoops/common';
+import { AttachScope, BimType, CullingVectorSpace, DataIds, DataKey, DrawMode, DrawStrategy, ImageId, ImageIds, InclusionKey, InstanceInc, InstanceIncs, InstanceKey, MatrixInc, MeshId, MeshIds, MeshKey, Milliseconds, ModelKey, OverlayAnchor, OverlayIndex, ScModelName, ScsBuffer, SessionType, SetVisibility, StateFailure, SvgConfig, ViewKey, TextureInterpolation, TextureMipMapping, TextureModifier, SetShaderOptions, UniformDescription } from '@ts3d-hoops/streamcache';
+import { KeyInfoBy, KeyInfoReturn, RequestBatchType, CuttingSectionLimits } from '../internal/types';
+import { MeshData, MeshInstanceData } from '../MeshData';
+import { AntiAliasingMode, BloomLayerInfo, BlurIntervalUnit, ComparisonConfig, CullingVector, ElementType, FaceFaceDistanceItem, ImageOptions, IMaterial, InstanceModifier, LightKey, LinePattern, LinePatternLengthUnit, MaterialParam, MetallicRoughnessValue, OverlayUnit, PointShape, PointSizeUnit, Projection, RendererType, ScsUri, SimpleReflectionAttenuationUnit, TextureOptions, TransparencyMode, XRayGroup, XRayTransparencyMode } from '../types';
+import { Camera } from '../Camera';
+import { MeshDataCopy } from '../MeshDataCopy';
+import { IncrementalPickConfig, PickConfig } from '../PickConfig';
+import { CompositeSelectionItem, IncrementalSelectionId, NodeEntitySelectionItem, SelectionItem } from '../selection';
+import { HiddenLineSettings } from '../settings/HiddenLineSettings';
+import { Light, PointLight } from '../Light';
+import { InitOptions } from '../internal/engine';
+import { StatisticMap } from '../internal/Statistics';
+import { ICuttingSection } from './ICuttingSection';
+export interface IScEngine {
+    addCuttingSection(cuttingSection: ICuttingSection): Promise<void>;
+    addLight(view_key: ViewKey, light: Light): Promise<LightKey>;
+    addNodesToOverlay(incs: InstanceIncs, viewKey: ViewKey, index: OverlayIndex): void;
+    addPointLight(view_key: ViewKey, light: PointLight): Promise<LightKey>;
+    addView(canvasContainer: HTMLDivElement): Promise<ViewKey>;
+    advanceExportToSvg(): Promise<string | undefined>;
+    advanceIncrementalSelection(handle: IncrementalSelectionId): Promise<SelectionItem[] | null>;
+    attachModel(attachScope: AttachScope, modelName: ScModelName, inclusionMatrix: Matrix12, parentMeasurementUnit: number, markAllInstancesInvisible: boolean): Promise<void>;
+    attachScsBuffer(attachScope: AttachScope, buffer: ScsBuffer | null, inclusionMatrix: Matrix12, parentMeasurementUnit: number, markAllInstancesInvisible: boolean, resolveOnFullyLoaded: boolean, cancelUnitMatrix: boolean, autoUnitScale: boolean): Promise<void>;
+    attachScsModelByKey(attachScope: AttachScope, modelKey: ModelKey, inclusionMatrix: Matrix12, parentMeasurementUnit: number, markAllInstancesInvisible: boolean): InclusionKey;
+    beginConvexPolyhedronSelection(volumePlanes: Plane[], heuristicOrigin: Point3, config: IncrementalPickConfig): Promise<IncrementalSelectionId>;
+    beginExportToSvg(config: SvgConfig): Promise<void>;
+    beginRayDrillSelection(viewKey: ViewKey, rayCssOrigin: Point2, rayCssBoxRadius: number, config: IncrementalPickConfig): Promise<IncrementalSelectionId>;
+    beginRequestBatch(type: RequestBatchType): void;
+    beginScreenAreaSelection(viewKey: ViewKey, areaCssMin: Point2, areaCssMax: Point2, config: IncrementalPickConfig): Promise<IncrementalSelectionId>;
+    beginSphereSelection(sphereCenter: Vector3, sphereRadius: number, config: IncrementalPickConfig): Promise<IncrementalSelectionId>;
+    clearElementVisibility(incs: InstanceIncs, elementType: ElementType): void;
+    clearHighlight(): void;
+    clearLights(view_key: ViewKey): void;
+    createMatrix(elements: Matrix16): Promise<MatrixInc>;
+    compositePickFromScreen(viewKey: ViewKey, point: Point2, config: PickConfig, isDrawing: boolean): Promise<CompositeSelectionItem>;
+    computeMinimumBodyBodyDistance(inc1: InstanceInc, inc2: InstanceInc): Promise<FaceFaceDistanceItem>;
+    computeMininimumFaceFaceDistance(inc1: InstanceInc, face1: number, inc2: InstanceInc, face2: number): Promise<FaceFaceDistanceItem>;
+    computeMinimumFaceLineDistance(inc: InstanceInc, faceId: number, ray: Ray): Promise<FaceFaceDistanceItem>;
+    computeMinimumFaceRayDistance(inc: InstanceInc, faceId: number, ray: Ray): Promise<FaceFaceDistanceItem>;
+    createFloorplanMesh(incs: InstanceIncs): Promise<InstanceIncs>;
+    createIdentityMatrix(): Promise<MatrixInc>;
+    createImage(primaryImage: ImageOptions, thumbnailImage?: ImageOptions): Promise<ImageId>;
+    createMesh(meshData: MeshData): Promise<MeshId>;
+    createMeshInstance(meshInstanceData: MeshInstanceData): Promise<InstanceInc>;
+    debug_log(message: string): Promise<void>;
+    debug_stateFailure(value: StateFailure): Promise<void>;
+    debug_sync(): Promise<void>;
+    delayCapping(): void;
+    destroyImages(imageIds: ImageIds): Promise<void>;
+    detachInclusions(inclusionKeys: InclusionKey[]): Promise<void>;
+    destroyLocalInstances(instanceIncs: InstanceIncs): Promise<void>;
+    destroyMeshes(meshIds: MeshIds): Promise<void>;
+    destroyOverlay(index: OverlayIndex, viewKey: ViewKey): void;
+    disconnectNetwork(): void;
+    enableCappingIdleCallback(enable: boolean): Promise<boolean>;
+    enableHiddenLineRendering(view_key: ViewKey, settings: HiddenLineSettings): void;
+    endComparison(view_key: ViewKey): void;
+    endIncrementalSelection(handle: IncrementalSelectionId): void;
+    endRequestBatch(type: RequestBatchType): void;
+    exportToSvg(config: SvgConfig): Promise<string>;
+    feedScsBuffer(attachScope: AttachScope, buffer: ScsBuffer | null): void;
+    flushMetaDataCache(): void;
+    get3dContext(): WebGLRenderingContext | WebGL2RenderingContext | null;
+    getAllowHighDpi(): boolean;
+    getBounding(incs: InstanceIncs, ignoreInvisible: boolean, includeExcluded: boolean, tightBounding: boolean): Promise<Box>;
+    getCamera(viewKey: ViewKey): Camera;
+    getCameraPromise(viewKey: ViewKey): Promise<Camera>;
+    getCanvasSize(viewKey: ViewKey): Point2;
+    getCappedInstances(): Promise<InstanceIncs>;
+    getCappingGeometryVisibility(): boolean;
+    getClientDimensions(viewKey: ViewKey): [number, number];
+    getCullingVector(incs: InstanceIncs): Promise<(CullingVector | null)[]>;
+    getCuttingSectionLimits(): CuttingSectionLimits;
+    getDataFromIds(ids: DataIds): Promise<Uint8Array[]>;
+    getDrawnPartsBounding(incs: InstanceIncs, viewKey: ViewKey): Promise<Box>;
+    getEffectiveElementColor(incs: InstanceIncs, elementType: ElementType, elementOffset: number, viewKey: ViewKey): Promise<Color[]>;
+    getEffectivePartColor(incs: InstanceIncs, elementType: ElementType): Promise<Color[]>;
+    getEffectivePartOpacity(incs: InstanceIncs, elementType: ElementType): Promise<number[]>;
+    getElementColor(incs: InstanceIncs, elementType: ElementType, elementOffset: number): Promise<(Color | null)[]>;
+    getElementHighlighted(incs: InstanceIncs, elementType: ElementType, elementIndex: number): Promise<boolean[]>;
+    /**
+     * Returns an array of visibility values for the specified element.
+     * @param incs The instance that contains the element.
+     * @param elementType The type of the element (points, lines, faces).
+     * @param elementIndex The index of the element to query the visibility for.
+     * @returns A promise that resolves to an array of boolean values indicating the visibility of the specified element.
+     * @internal
+     */
+    getElementVisibility(incs: InstanceIncs, elementType: ElementType, elementIndex: number): Promise<boolean[]>;
+    getEyeDomeLightingBlurEdgeDistance(view_key: ViewKey): Promise<number>;
+    getEyeDomeLightingBlurInterval(view_key: ViewKey): Promise<number>;
+    getEyeDomeLightingBlurSamples(view_key: ViewKey): Promise<number>;
+    getEyeDomeLightingEnabled(view_key: ViewKey): Promise<boolean>;
+    getEyeDomeLightingOpacity(view_key: ViewKey): Promise<number>;
+    getEyeDomeLightingShadingEdgeDistance(view_key: ViewKey): Promise<number>;
+    getFullCameraMatrix(camera: Camera, viewKey: ViewKey): Matrix;
+    getInstancesCappingMeshData(inc: InstanceInc): Promise<MeshId>;
+    getInstancesCappingMeshData(incs: InstanceIncs): Promise<MeshIds>;
+    getInstancesMeshData(inc: InstanceInc): Promise<MeshId>;
+    getInstancesMeshData(incs: InstanceIncs): Promise<MeshIds>;
+    getInteractiveDrawLimitIncreaseEnabled(viewKey: ViewKey): Promise<boolean>;
+    getLight(view_key: ViewKey, key: LightKey): Promise<Light | undefined>;
+    getLightKeys(view_key: ViewKey): Promise<LightKey[]>;
+    getLooseBounding(): Promise<Box>;
+    getMaxOverlayIndex(): OverlayIndex;
+    getMeshData(id: MeshId): Promise<MeshDataCopy>;
+    getMetallicRoughness(incs: InstanceIncs): Promise<(MetallicRoughnessValue | null)[]>;
+    getMinimumFramerate(viewKey: ViewKey): Promise<number>;
+    getModelBounding(ignoreInvisible: boolean, includeExcluded: boolean, tightBounding: boolean): Promise<Box>;
+    getNetworkModelName(): ScModelName;
+    getPartsBounding(incs: InstanceIncs, ignoreInvisible: boolean, tightBounding: boolean): Promise<Box>;
+    getPartAmbientColor(incs: InstanceIncs, elementType: ElementType): Promise<(Color | null)[]>;
+    getPartMaterial(nodeIds: InstanceIncs): Promise<IMaterial[]>;
+    getPartColor(incs: InstanceIncs, elementType: ElementType): Promise<(Color | null)[]>;
+    getPartEffectiveAmbientColor(incs: InstanceIncs, elementType: ElementType): Promise<Color[]>;
+    getPartEffectiveEmissiveColor(incs: InstanceIncs, elementType: ElementType): Promise<Color[]>;
+    getPartEffectiveSpecularColor(incs: InstanceIncs, elementType: ElementType): Promise<Color[]>;
+    getPartEmissiveColor(incs: InstanceIncs, elementType: ElementType): Promise<(Color | null)[]>;
+    getPartHasTransparency(incs: InstanceIncs): Promise<boolean[]>;
+    getPartHighlighted(incs: InstanceIncs): Promise<boolean[]>;
+    getPartOpacity(incs: InstanceIncs): (number | null)[];
+    setPartShader(incs: InstanceIncs, vertexSource: string, fragmentSource: string, options?: SetShaderOptions): Promise<void>;
+    setPartShaderUniforms(incs: InstanceIncs, uniforms: Record<string, UniformDescription>): void;
+    getPartSpecularColor(incs: InstanceIncs, elementType: ElementType): Promise<(Color | null)[]>;
+    getPickTolerance(): number;
+    getPointShape(view_key: ViewKey): Promise<PointShape>;
+    getPointSize(view_key: ViewKey): Promise<[number, PointSizeUnit]>;
+    getPrimaryModelKey(): Promise<ModelKey>;
+    getProjectionMatrix(camera: Camera, viewKey: ViewKey): Matrix;
+    getRendererType(): RendererType;
+    getScsInfo(): ScsUri | ScsBuffer | null;
+    getSessionType(): SessionType;
+    getStatistics(forceUpdate?: boolean): Promise<StatisticMap>;
+    getStreamCutoffScale(): number;
+    getVersionString(): string;
+    getViewMatrix(camera: Camera): Matrix;
+    hasDepthRange(incs: InstanceIncs): Promise<boolean[]>;
+    highlightElements(incs: InstanceIncs, elementType: ElementType, elementIndex: number, elementCount: number, value: boolean): void;
+    highlightParts(incs: InstanceIncs, highlighted: boolean): void;
+    instanceKeyInfo(attachScope: AttachScope, by: KeyInfoBy.Attachment, ret: KeyInfoReturn.AllKeys): Promise<Map<ModelKey, InstanceKey[]>>;
+    instanceKeyInfo(attachScope: AttachScope, by: KeyInfoBy.Attachment, ret: KeyInfoReturn.KeyCountOnly): Promise<[number]>;
+    isInit(): boolean;
+    loadEmpty(): Promise<void>;
+    loadFinished(): boolean;
+    logMessage(message: string): void;
+    loseWebGlContext(): boolean;
+    markCameraAsEmpty(viewKey: ViewKey): void;
+    metaDataKeyInfo(modelKeyOrAttachScope: ModelKey | AttachScope, byModel: boolean, keyCountOnly: boolean): Promise<[number] | DataKey[] | Map<ModelKey, DataKey[]>>;
+    modelKeysFromInclusionKeys(inclusionKeys: InclusionKey[]): Promise<ModelKey[]>;
+    pauseAllRendering(callback?: () => void): void;
+    pauseRendering(viewKey: ViewKey): void;
+    pickAllFromRay(ray: Ray, config: PickConfig): Promise<NodeEntitySelectionItem[]>;
+    pickAllFromScreen(viewKey: ViewKey, point: Point2, config: PickConfig, isDrawing: boolean): Promise<NodeEntitySelectionItem[]>;
+    pickFromRay(ray: Ray, config: PickConfig): Promise<NodeEntitySelectionItem | null>;
+    pickFromScreen(viewKey: ViewKey, point: Point2, config: PickConfig, isDrawing: boolean): Promise<NodeEntitySelectionItem | null>;
+    redraw(viewKey: ViewKey): void;
+    registerBimInstances(incs: InstanceIncs, bimType: BimType): void;
+    removeAllCuttingSections(): void;
+    removeCuttingSection(cuttingSection: ICuttingSection): Promise<void>;
+    removeLight(view_key: ViewKey, key: LightKey): void;
+    removeView(index: ViewKey): void;
+    getViews(): number[];
+    replaceMesh(id: MeshId, data: MeshData): Promise<void>;
+    requestMeshInstances(incs: InstanceIncs): void;
+    resetCachedStatistics(): void;
+    resetColors(): void;
+    resetOpacity(): void;
+    resetPartMaterial(nodeIds: InstanceIncs, params?: MaterialParam[]): void;
+    resetToEmpty(whitelistInstances: InstanceKey[], whitelistMeshes: MeshKey[]): Promise<void>;
+    resize(viewKey?: ViewKey): void;
+    resumeRendering(viewKey: ViewKey): void;
+    resumeAllRendering(): void;
+    safeGetMetaData(modelKey: ModelKey, dataKey: DataKey): Promise<Uint8Array | null>;
+    safeGetMetaDatas(modelKey: ModelKey, dataKeys: DataKey[]): Promise<Uint8Array[] | null>;
+    safeLoadMetaDatas(ids: DataIds): Promise<void>;
+    setAllowHighDpi(allow: boolean): void;
+    setAntiAliasingMode(view_key: ViewKey, antiAliasingMode: AntiAliasingMode): void;
+    setAmbientLightColor(view_key: ViewKey, value: Color): void;
+    setAmbientOcclusionEnabled(view_key: ViewKey, enabled: boolean): void;
+    setAmbientOcclusionRadius(view_key: ViewKey, radius: number): void;
+    setBackFacesVisible(view_key: ViewKey, visible: boolean): void;
+    setBackgroundGradient(view_key: ViewKey, top: Color | null, bottom: Color | null): void;
+    setBloomEnabled(view_key: ViewKey, value: boolean): void;
+    setBloomIntensityScale(view_key: ViewKey, value: number): void;
+    setBloomLayers(view_key: ViewKey, layers: BloomLayerInfo[]): void;
+    setBloomThreshold(view_key: ViewKey, value: number): void;
+    setBloomThresholdRampWidth(view_key: ViewKey, value: number): void;
+    setCamera(viewKey: ViewKey, camera: Camera): void;
+    setCappingDelay(delayInMilliseconds: number): void;
+    setCappingFaceColor(color: Color | null): void;
+    setCappingGeometryVisibility(view_key: ViewKey, cappingGeometryVisibility: boolean): void;
+    setCappingLineColor(color: Color | null): void;
+    setCullingVector(incs: InstanceIncs, space: CullingVectorSpace, vector: Point3, toleranceDegrees: number): void;
+    setDefaultDepthRange(view_key: ViewKey, min: number, max: number): void;
+    setDepthRange(incs: InstanceIncs, min: number, max: number): void;
+    setDisplayIncompleteFrames(value: boolean, viewKey: ViewKey): void;
+    setDrawMode(view_key: ViewKey, value: DrawMode): void;
+    setDrawStrategy(viewKey: ViewKey, strategy: DrawStrategy): void;
+    setElementColor(incs: InstanceIncs, elementType: ElementType, elementOffset: number, elementCount: number, color: Color): void;
+    setElementHighlightColor(viewKey: ViewKey, fillColor: Color | null, outlineColor: Color | null): void;
+    setElementVisibility(incs: InstanceIncs, elementType: ElementType, elementOffset: number, elementCount: number, visible: boolean): void;
+    setExplodeMagnitude(magnitude: number): void;
+    setEyeDomeLightingEnabled(view_key: ViewKey, enabled: boolean): void;
+    setEyeDomeLightingBlurSamples(view_key: ViewKey, value: number): void;
+    setEyeDomeLightingBlurInterval(view_key: ViewKey, value: number): void;
+    setEyeDomeLightingBlurEdgeDistance(view_key: ViewKey, value: number): void;
+    setEyeDomeLightingShadingEdgeDistance(view_key: ViewKey, value: number): void;
+    setEyeDomeLightingOpacity(view_key: ViewKey, value: number): void;
+    setFaceVisibility(view_key: ViewKey, faceVisibility: boolean): void;
+    setGoochBaseColorProminence(view_key: ViewKey, value: number): void;
+    setGoochBlue(view_key: ViewKey, value: number): void;
+    setGoochLuminanceShiftStrength(view_key: ViewKey, value: number): void;
+    setGoochYellow(view_key: ViewKey, value: number): void;
+    setGroundPlane(view_key: ViewKey, normal: Point3, position?: Point3): void;
+    setHardEdgeColor(view_key: ViewKey, value: Color): void;
+    setHardEdgesEnabled(view_key: ViewKey, value?: boolean): void;
+    setHardEdgeOpacity(view_key: ViewKey, value: number): void;
+    setHardEdgeThreshold(view_key: ViewKey, value: number): void;
+    setHardEdgeThresholdRampWidth(view_key: ViewKey, value: number): void;
+    setHighlightColorizeCompression(viewKey: ViewKey, compressionLevel: number): void;
+    setImageBasedLightingEnabled(view_key: ViewKey, value: boolean): void;
+    setImageBasedLightingIntensity(view_key: ViewKey, value: number): void;
+    setImageBasedLightingMatrix(view_key: ViewKey, value: Matrix): void;
+    setImageBasedLightingEnvironment(view_key: ViewKey, data: Uint8Array): void;
+    setImageBasedLightingEnvironmentToDefault(view_key: ViewKey): void;
+    setInstanceModifier(instanceModifier: InstanceModifier, incs: InstanceIncs, modifierValue: boolean): void;
+    setInstancesMatrix(incs: InstanceIncs, matrix: Matrix): void;
+    setInteractiveDrawDelay(value: number, viewKey: ViewKey): void;
+    setInteractiveDrawLimitIncreaseEnabled(enable: boolean, viewKey: ViewKey): void;
+    setLightingEnabled(view_key: ViewKey, enabled: boolean): void;
+    setLineJitterEnabled(view_key: ViewKey, value: boolean): void;
+    setLineJitterFrequency(view_key: ViewKey, value: number): void;
+    setLineJitterInstanceCount(view_key: ViewKey, value: number): void;
+    setLineJitterRadius(view_key: ViewKey, value: number): void;
+    setLinePattern(incs: InstanceIncs, pattern: LinePattern, patternLength: number, patternLengthUnit: LinePatternLengthUnit): void;
+    setLineVisibility(view_key: ViewKey, lineVisibility: boolean): void;
+    setMatrices(incs: InstanceIncs, matrices: Matrix[]): void;
+    setMeshLevel(incs: InstanceIncs, meshLevel: number): void;
+    setMetallicRoughness(incs: InstanceIncs, metallicFactor: number, roughnessFactor: number): void;
+    setMetallicRoughnessMaterialOverride(defaultMetallicFactor: number, defaultRoughnessFactor: number): void;
+    setMinimumFramerate(viewKey: ViewKey, value: number): void;
+    setNodeHighlightColor(viewKey: ViewKey, fillColor: Color | null, outlineColor: Color | null): void;
+    setOverlayCamera(index: OverlayIndex, camera: Camera, viewKey: ViewKey): void;
+    setOverlayViewport(index: OverlayIndex, anchor: OverlayAnchor, x: number, xUnit: OverlayUnit, y: number, yUnit: OverlayUnit, width: number, widthUnit: OverlayUnit, height: number, heightUnit: OverlayUnit, viewKey: ViewKey): void;
+    setOverlayVisibility(index: OverlayIndex, visibility: boolean, viewKey: ViewKey): void;
+    setPartMaterial(incs: InstanceIncs, material: IMaterial): void;
+    setPartColor(incs: InstanceIncs, elementType: ElementType, color: Color): void;
+    setPartAmbientColor(incs: InstanceIncs, elementType: ElementType, color: Color): void;
+    setPartAmbientMix(incs: InstanceIncs, elementType: ElementType, value: number): void;
+    setPartEmissiveColor(incs: InstanceIncs, elementType: ElementType, color: Color): void;
+    setPartSpecularColor(incs: InstanceIncs, elementType: ElementType, color: Color): void;
+    setPartSpecularIntensity(incs: InstanceIncs, elementType: ElementType, value: number): void;
+    setPartOpacity(incs: InstanceIncs, opacity: number): void;
+    setPartVisibility(incs: InstanceIncs, visible: boolean, onlyDemanded: boolean): void;
+    setPickTolerance(tolerance: number): void;
+    setPointShape(view_key: ViewKey, shape: PointShape): void;
+    setPointSize(view_key: ViewKey, size: number, unit: PointSizeUnit): void;
+    setPointVisibilityTest(view_key: ViewKey, points: Point3[]): void;
+    setProjection(viewKey: ViewKey, projection: Projection): void;
+    setRemoteEndpoint(uri: string, modelName: ScModelName): void;
+    setServerRenderQuality(jpegQualityLow: number, jpegQualityHigh: number, scaleLow: number, scaleHigh: number): void;
+    setSimpleShadowBlurInterval(view_key: ViewKey, value: number): void;
+    setSimpleShadowBlurSamples(view_key: ViewKey, value: number): void;
+    setSimpleShadowColor(view_key: ViewKey, value: Color): void;
+    setSimpleShadowEnabled(view_key: ViewKey, value: boolean): void;
+    setSimpleShadowInteractiveUpdateEnabled(view_key: ViewKey, value?: boolean): void;
+    setSimpleShadowOpacity(view_key: ViewKey, value: number): void;
+    setSimpleShadowResolution(view_key: ViewKey, pixels: number): void;
+    setSilhouetteColor(view_key: ViewKey, value: Color): void;
+    setSilhouetteEnabled(view_key: ViewKey, value?: boolean): void;
+    setSilhouetteOpacity(view_key: ViewKey, value: number): void;
+    setSilhouetteThreshold(view_key: ViewKey, value: number): void;
+    setSilhouetteThresholdRampWidth(view_key: ViewKey, value: number): void;
+    setSimpleReflectionAttenuation(view_key: ViewKey, nearDistance: number, farDistance: number, unit?: SimpleReflectionAttenuationUnit): void;
+    setSimpleReflectionBlurInterval(view_key: ViewKey, value: number, unit: BlurIntervalUnit): void;
+    setSimpleReflectionBlurSamples(view_key: ViewKey, value: number): void;
+    setSimpleReflectionEnabled(view_key: ViewKey, value?: boolean): void;
+    setSimpleReflectionFadeAngle(view_key: ViewKey, degrees: number): void;
+    setSimpleReflectionOpacity(view_key: ViewKey, value: number): void;
+    setStreamIdleMarker(): Promise<void>;
+    setStreamCutoffScale(value: number): void;
+    setTexture(instanceIncs: InstanceIncs, options: TextureOptions): Promise<void>;
+    setTimeout(handler: () => void, timeout: number): ReturnType<typeof setTimeout>;
+    setToonShadingBandCount(view_key: ViewKey, bandCount: number): void;
+    setToonShadingSpecularFactor(view_key: ViewKey, specularFactor: number): void;
+    setTransparencyMode(view_key: ViewKey, value: TransparencyMode): void;
+    setVisibilityByAttachment(attachScope: AttachScope, setVisibility: SetVisibility): void;
+    setXRayColor(view_key: ViewKey, group: XRayGroup, element: ElementType, color: Color): void;
+    setXRayOpacity(view_key: ViewKey, value: number, element?: ElementType): void;
+    setXRayTransparencyMode(view_key: ViewKey, value: XRayTransparencyMode): void;
+    shutdown(): void;
+    sleep(duration: Milliseconds): Promise<void>;
+    start(canvasContainer: HTMLDivElement, options: InitOptions): boolean;
+    startComparison(view_key: ViewKey, instanceSet1: InstanceIncs, instanceSet2: InstanceIncs, config?: ComparisonConfig): void;
+    startExplode(incs: InstanceIncs, vector: Point3): void;
+    stopExplode(): void;
+    synchronizeVisibilities(incs: InstanceIncs, visible: boolean): void;
+    testPointVisibility(view_key: ViewKey, points: Point3[]): Promise<number[]>;
+    triangulatePolygon(polygonPoints: Float32Array | number[], normal: Vector3): Float32Array;
+    throttleLoad(newPauseInterval: Milliseconds, throttleDuration: Milliseconds): void;
+    unsetCullingVector(incs: InstanceIncs): void;
+    unsetDepthRange(incs: InstanceIncs): void;
+    unsetElementColor(incs: InstanceIncs, elementType: ElementType, elementOffset: number, elementCount: number): void;
+    unsetLinePattern(incs: InstanceIncs): void;
+    unsetPartAmbientColor(incs: InstanceIncs, elementType: ElementType): void;
+    unsetPartColor(incs: InstanceIncs, elementType: ElementType): void;
+    unsetPartEmissiveColor(incs: InstanceIncs, elementType: ElementType): void;
+    unsetPartSpecularColor(incs: InstanceIncs, elementType: ElementType): void;
+    unsetPartSpecularIntensity(incs: InstanceIncs, elementType: ElementType): void;
+    unsetPartOpacity(incs: InstanceIncs): void;
+    unsetTexture(incs: InstanceIncs): void;
+    unsetMetallicRoughness(incs: InstanceIncs): void;
+    unsetXRayColor(view_key: ViewKey, group: XRayGroup, element: ElementType): Promise<void>;
+    updateCamera(viewKey: ViewKey, camera: Camera): Camera;
+    updateCuttingSection(cuttingSection: ICuttingSection): Promise<void>;
+    updateLight(view_key: ViewKey, key: LightKey, light: Light): void;
+    /**
+     * Unsets the visibility mask override for the given instances
+     * @param instances Instances to apply the override to
+     * @param viewIds Array of view IDs to remove override from. Pass empty array to remove from all views.
+     */
+    unsetElementsVisibilityOverride(instances: InstanceIncs, viewIds: number[]): void;
+    /**
+     * Sets the visibility mask override for the given instances
+     * @param instances Instances to apply the override to
+     * @param viewIds Array of view IDs to apply override to. Pass empty array to apply to all views.
+     * @param pointsVisible if points should be visible in the mask
+     * @param linesVisible if lines should be visible in the mask
+     * @param facesVisible if faces should be visible in the mask
+     */
+    setElementsVisibilityOverride(instances: InstanceIncs, viewIds: number[], pointsVisible: boolean, linesVisible: boolean, facesVisible: boolean): void;
+    /**
+     * Unsets the draw mode override for the given instances
+     * @param instances Instances to apply the override to
+     * @param viewIds Array of view IDs to remove override from. Pass empty array to remove from all views.
+     */
+    unsetElementsDrawModeOverride(instances: InstanceIncs, viewIds: number[]): void;
+    /**
+     * Sets the draw mode override for the given instances
+     * @param instances Instances to apply the override to
+     * @param viewIds Array of view IDs to apply override to. Pass empty array to apply to all views.
+     * @param mode The draw mode to apply
+     */
+    setElementsDrawModeOverride(instances: InstanceIncs, viewIds: number[], mode: DrawMode): void;
+    waitForImageDecoding(): Promise<void>;
+    _getScPlaneArray(cuttingSection: ICuttingSection): Vector4[];
+    _toTextureInterpolation(value: boolean | undefined): TextureInterpolation;
+    _toTextureMipMapping(value: boolean | undefined): TextureMipMapping;
+    _toTextureModifier(value: number | undefined): TextureModifier;
+}

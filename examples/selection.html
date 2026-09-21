@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <title>Selection Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      table td {
+        vertical-align: top;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/selection.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/modelTree.js">
+    <link rel="modulepreload" crossorigin href="/scripts/utils.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="modelTree"></div>
+        </td>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+        </td>
+        <td>
+          <div id="selectionSets"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="example-div-block">Selection Options:</div>
+          <div class="example-div-block">
+            <div>
+              <label for="nodeSelectionHighlightMode">Node Highlight Mode: </label>
+              <select id="nodeSelectionHighlightMode">
+                <option selected="selected" value="2">HighlightAndOutline</option>
+                <option value="0">HighlightOnly</option>
+                <option value="1">OutlineOnly</option>
+              </select>
+            </div>
+            <div>
+              <label for="nodeSelectionColor">Node Selection Color: </label>
+              <input type="color" id="nodeSelectionColor" value="#FFFF00" />
+            </div>
+            <div>
+              <label for="partSelectionOutlineColor">Node Selection Outline Color: </label>
+              <input type="color" id="nodeSelectionOutlineColor" value="#FFFF00" />
+            </div>
+          </div>
+
+          <div class="example-div-block">
+            <div>
+              <label for="nodeElementSelectionHighlightMode">Node Element Highlight Mode: </label>
+              <select id="nodeElementSelectionHighlightMode">
+                <option selected="selected" value="2">HighlightAndOutline</option>
+                <option value="0">HighlightOnly</option>
+                <option value="1">OutlineOnly</option>
+              </select>
+            </div>
+            <div>
+              <label for="nodeSelectionColor">Node Element Selection Color: </label>
+              <input type="color" id="nodeElementSelectionColor" value="#FF0000" />
+            </div>
+            <div>
+              <label for="nodeElementSelectionOutlineColor"
+                >Node Element Selection Outline Color:
+              </label>
+              <input type="color" id="nodeElementSelectionOutlineColor" value="#FF0000" />
+            </div>
+          </div>
+
+          <div class="example-div-block">
+            <label for="highlightPartSelection">Highlight Node Selection: </label>
+            <input type="checkbox" id="highlightPartSelection" checked="checked" />
+          </div>
+          <div class="example-div-block">
+            <div>
+              <label for="highlightFaceElementSelection">Highlight Face Element Selection: </label>
+              <input type="checkbox" id="highlightFaceElementSelection" checked="checked" />
+            </div>
+          </div>
+          <div class="example-div-block">
+            <div>
+              <label for="highlightLineElementSelection">Highlight Line Element Selection: </label>
+              <input type="checkbox" id="highlightLineElementSelection" checked="checked" />
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="example-div-block">Selection Results:</div>
+          <table id="resultTable"></table>
+        </td>
+        <td></td>
+      </tr>
+    </table>
+
+  </body>
+</html>

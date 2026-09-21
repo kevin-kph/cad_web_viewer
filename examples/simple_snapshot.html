@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+    <style type="text/css">
+      .viewcanvas {
+        width: 640px;
+        height: 480px;
+        position: relative;
+      }
+    </style>
+
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/simple_snapshot.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+  </head>
+  <body>
+    <h3>Simple Snapshot Example</h3>
+    <button id="snapshot-button" disabled="false">Take Snapshot</button>
+    <div id="webviewer" class="viewcanvas"></div>
+    <div id="snapshots"></div>
+  </body>
+</html>

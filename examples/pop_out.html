@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Pop In / Out Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+    <style>
+      #viewerContainer {
+        width: 640px;
+        height: 480px;
+      }
+
+      #viewer {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/pop_out.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+  </head>
+  <body>
+    <div>
+      <h3>Web Viewer Pop In / Out Example</h3>
+      <div id="viewerContainer">
+        <div id="viewer"></div>
+      </div>
+    </div>
+    <div>
+      <button id="popOutButton">Pop out</button>
+      <button id="fullScreenButton">Full Screen</button>
+    </div>
+    <div id="message" style="display: none">
+      The Pop Out functionality demonstrated in this sample is not supported on Microsoft Internet
+      Explorer and Edge.
+    </div>
+
+  </body>
+</html>

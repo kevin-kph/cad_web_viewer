@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>Material Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      table td {
+        vertical-align: top;
+      }
+
+      #bulkOperations,
+      #individualOperations {
+        border: 1px solid gray;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/material.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/modelTree.js">
+    <link rel="modulepreload" crossorigin href="/scripts/utils.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="modelTree"></div>
+        </td>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+        </td>
+      </tr>
+    </table>
+    <div class="example-div-block">
+      Instructions: Click a part to select it. Hold CTRL when clicking to add multiple parts to the
+      selection list.
+    </div>
+    <div class="example-div-block" id="selectedPartsNames">SelectedParts:</div>
+    <div id="bulkOperations" class="example-div-block">
+      <div>Bulk Operations:</div>
+      <div class="example-div-block">
+        <div>
+          <div>
+            <label for="setPartsColor">Set Selected Nodes Face Color: </label>
+            <input type="color" id="setPartsColor" value="#FF0000" />
+          </div>
+          <div>
+            <label for="setPartsColor">Set Selected Nodes Line Color: </label>
+            <input type="color" id="setPartsLineColor" value="#FF0000" />
+          </div>
+          <button id="resetPartsColor">Reset All Colors</button>
+        </div>
+        <div>
+          <div>
+            <label for="setPartsOpacity">Set Selected Nodes Opacity: </label>
+            <input type="number" id="setPartsOpacity" min="0" max="1" step="0.1" value="1.0" />
+          </div>
+          <div>
+            <button id="resetNodesOpacity">Reset Selected Nodes Opacity</button>
+            <button id="resetModelOpacity">Reset Model Opacity</button>
+          </div>
+        </div>
+        <div>
+          <span>Set Parts Visibility: </span>
+          <button id="setPartsVisibilityOn">On</button>
+          <button id="setPartsVisibilityOff">Off</button>
+          <button id="resetPartsVisibility">Reset All Visibility</button>
+        </div>
+      </div>
+    </div>
+    <div id="individualOperations" class="example-div-block">
+      <div>Independant Operations:</div>
+      <table id="selectedPartsTable">
+        <tr id="selectedPartsTableHeader">
+          <td>Name</td>
+          <td>Color</td>
+          <td>Opacity</td>
+          <td>Visibility</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button id="setPartsColors">Set Parts Colors</button></td>
+          <td><button id="setPartsOpacities">Set Parts Opacities</button></td>
+          <td><button id="setPartsVisibilities">Set Parts Visibilities</button></td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>

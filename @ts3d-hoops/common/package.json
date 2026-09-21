@@ -1,0 +1,17 @@
+{
+  "name": "@ts3d-hoops/common",
+  "version": "0.0.1",
+  "homepage": "https://techsoft3d.com/",
+  "license": "Proprietary",
+  "type": "module",
+  "module": "./hoops-common.js",
+  "browser": "./hoops-common.iife.js",
+  "main": "./hoops-common.js",
+  "typings": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./hoops-common.js"
+    }
+  }
+}

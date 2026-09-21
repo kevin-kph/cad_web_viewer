@@ -1,0 +1,37 @@
+import { Point2 } from '@ts3d-hoops/common';
+import { Uuid } from '../types';
+import { MarkupItem } from './MarkupItem';
+import { MarkupRenderer } from './MarkupRenderer';
+import { MarkupView } from './MarkupView';
+import { IView } from '../core/IView';
+import { ICallbackManager } from '../core/ICallbackManager';
+export declare class MarkupItemManager {
+    private readonly _callbackManager;
+    private readonly _markupRenderer;
+    private readonly _markupItems;
+    private _activeViews;
+    private _selectedMarkup;
+    private readonly _pendingUpdateHandleTimer;
+    private _viewToUpdate;
+    private _pickTolerance;
+    constructor(callbackManager: ICallbackManager, markupRenderer: MarkupRenderer);
+    shutdown(): void;
+    private _updateLater;
+    updateLater(view: IView): void;
+    private _updateAllViews;
+    update(): void;
+    registerMarkupItem(markupItem: MarkupItem, view: IView): Uuid;
+    unregisterMarkupItem(uniqueId: Uuid, view: IView): void;
+    getActiveView(view: IView): MarkupView | null;
+    getViews(markupView: MarkupView): IView[];
+    setActiveView(view: IView, markupView: MarkupView | null): Promise<void>;
+    markupViewDeleted(markupView: MarkupView): void;
+    viewDeleted(view: IView): void;
+    renderMarkup(view: IView): void;
+    renderActiveViewMarkup(view: IView): void;
+    getPickTolerance(): number;
+    setPickTolerance(tolerance: number): void;
+    pick(point: Point2, view: IView): MarkupItem | null;
+    select(markupItem: MarkupItem | null, view: IView): void;
+    getSelected(): MarkupItem | null;
+}

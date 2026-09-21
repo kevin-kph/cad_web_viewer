@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Start and Shutdown Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      body {
+        padding: 10px;
+      }
+
+      .example-viewer-panel {
+        padding: 3px;
+        margin: 5px;
+        width: 325px;
+        border: 1px solid black;
+      }
+
+      #viewers {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/start_and_shutdown.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div>
+      <label for="rendererSelect">Renderer: </label>
+      <select id="rendererSelect">
+        <option value="0">Client</option>
+        <option value="1">Server</option>
+      </select>
+
+      <label for="instanceSelect"> Instance: </label>
+      <select id="instanceSelect">
+        <option value="microengine">microengine</option>
+        <option value="moto">moto</option>
+      </select>
+
+      <button id="createNewViewer">Create New Viewer</button>
+    </div>
+
+    <div id="viewers"></div>
+
+  </body>
+</html>

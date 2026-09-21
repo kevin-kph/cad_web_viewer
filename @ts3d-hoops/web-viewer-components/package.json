@@ -1,0 +1,29 @@
+{
+  "name": "@ts3d-hoops/web-viewer-components",
+  "type": "module",
+  "version": "0.0.1",
+  "typings": "./index.d.ts",
+  "homepage": "https://techsoft3d.com/",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ts3d-hoops/common": "../common",
+    "@ts3d-hoops/streamcache": "../streamcache",
+    "@ts3d-hoops/web-viewer": "../web-viewer",
+    "@ts3d-hoops/ui-kit": "../ui-kit",
+    "@lit/context": "1.1.2",
+    "color-string": "2.0.1",
+    "lit": "3.1.2"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./lib/*": "./lib/*/*.js",
+    ".": "./index.js",
+    "./hoops-bcf-panel/*": "./lib/hoops-bcf-panel/*.js",
+    "./hoops-cad-configuration-list/*": "./lib/hoops-cad-configuration-list/*.js",
+    "./hoops-model-tree/*": "./lib/hoops-model-tree/*.js",
+    "./hoops-web-viewer": "./lib/hoops-web-viewer.js",
+    "./services": "./lib/services/index.js",
+    "./services/*": "./lib/services/*.js"
+  },
+  "customElements": "public/custom-elements.json"
+}

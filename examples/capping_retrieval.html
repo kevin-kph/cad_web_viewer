@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Capping Retrieval</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      body {
+        padding: 10px;
+      }
+      p {
+        font-family: sans-serif;
+        font-size: 1.5em;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/capping_retrieval.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="sourceContainer" class="example-canvas-small" style="display: inline-block"></div>
+    <div id="destContainer" class="example-canvas-small" style="display: inline-block"></div>
+    <p>
+      Move the cutting plane in the left panel to see the cutting section recreated in the right
+      panel
+    </p>
+
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Bounding Box Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      body {
+        padding: 10px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/bounding_box.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/utils.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="viewerContainer" class="example-canvas-small"></div>
+
+    <div class="example-div-block">Select a part to see a SVG Rendering of its bounding box</div>
+
+    <div class="example-div-block">
+      <label for="boxColor">Box Color</label>
+      <input type="color" id="boxColor" value="000000" />
+    </div>
+
+    <div class="example-div-block">
+      <label for="pointSize">Point Size</label>
+      <input type="number" id="pointSize" step="0.1" value="2" />
+    </div>
+
+    <div class="example-div-block">
+      <label for="wireWidth">Wire Width</label>
+      <input type="number" id="wireWidth" step="0.1" value="1" />
+    </div>
+
+  </body>
+</html>

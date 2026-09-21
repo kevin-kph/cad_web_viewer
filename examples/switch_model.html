@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Switch Model Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      table td {
+        vertical-align: top;
+      }
+      button {
+        margin-bottom: 4px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/switch_model.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+        </td>
+        <td>
+          <div class="example-div-block">
+            <div>
+              <button id="switchToArboleda">switch to arboleda</button>
+            </div>
+            <div>
+              <button id="switchToBnc">switch to bnc</button>
+            </div>
+            <div>
+              <button id="switchToLandinggear">switch to landinggear</button>
+            </div>
+            <div>
+              <button id="switchToMicroEngine">switch to micro engine</button>
+            </div>
+            <div>
+              <button id="switchToMountainHome">switch to mountain home</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

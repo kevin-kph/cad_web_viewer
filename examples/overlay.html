@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <title>Overlay Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      #viewerContainer {
+        margin: auto;
+      }
+
+      .overlay-panel {
+        border: 1px solid gray;
+        margin: 5px;
+      }
+
+      .num-input {
+        width: 40px;
+      }
+
+      .overlay-name {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/overlay.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="viewerContainer" class="example-canvas-small"></div>
+    <div id="panels">
+      <div class="overlay-panel" id="triad"></div>
+      <div class="overlay-panel" id="cube"></div>
+      <div class="overlay-panel" id="static"></div>
+    </div>
+
+    <div style="display: none">
+      <div id="panel-template">
+        <div class="overlay-name"></div>
+        <div>Enabled: <input class="overlay-enabled" type="checkbox" checked="checked" /></div>
+        <div>
+          Anchor:
+          <select class="overlay-anchor">
+            <option value="0">UpperLeftCorner</option>
+            <option value="1">LowerLeftCorner</option>
+            <option value="2">LowerRightCorner</option>
+            <option value="3">UpperRightCorner</option>
+            <option value="4">TopCenter</option>
+            <option value="5">LeftCenter</option>
+            <option value="6">RightCenter</option>
+            <option value="7">BottomCenter</option>
+            <option value="8">Center</option>
+          </select>
+        </div>
+        <div>
+          X:
+          <input class="overlay-x-pos num-input" type="text" />
+          <select class="overlay-x-unit">
+            <option value="0" selected>Pixels</option>
+            <option value="1">ProportionOfCanvas</option>
+            <option value="2">ProportionOfOtherDimension</option>
+          </select>
+          Y:
+          <input class="overlay-y-pos num-input" type="text" />
+          <select class="overlay-y-unit">
+            <option value="0" selected>Pixels</option>
+            <option value="1">ProportionOfCanvas</option>
+            <option value="2">ProportionOfOtherDimension</option>
+          </select>
+        </div>
+        <div>
+          Width:
+          <input class="overlay-width num-input" type="text" />
+          <select class="overlay-width-unit">
+            <option value="0" selected>Pixels</option>
+            <option value="1">ProportionOfCanvas</option>
+            <option value="2">ProportionOfOtherDimension</option>
+          </select>
+          Height:
+          <input class="overlay-height num-input" type="text" />
+          <select class="overlay-height-unit">
+            <option value="0" selected>Pixels</option>
+            <option value="1">ProportionOfCanvas</option>
+            <option value="2">ProportionOfOtherDimension</option>
+          </select>
+        </div>
+        <div>
+          <button class="overlay-apply">Apply</button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

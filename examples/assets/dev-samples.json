@@ -1,0 +1,247 @@
+[
+  {
+    "name": "3D Text Insertion",
+    "description": "Demonstrates inserting text as a 3D object.",
+    "ssr": "text_insertion.html",
+    "csr": "text_insertion.html"
+  },
+  {
+    "name": "Animation",
+    "description": "Demonstrates creating basic animations.",
+    "ssr": "animation.html",
+    "csr": "animation.html"
+  },
+  {
+    "name": "Annotation",
+    "description": "Demonstrates creating basic annotations using custom operators and markup items.",
+    "ssr": "annotation.html",
+    "csr": "annotation.html"
+  },
+  {
+    "name": "Assembly Building",
+    "description": "Demonstrates how to dynamically load assemblies in an existing scene.",
+    "ssr": "assembly_building.html",
+    "csr": "assembly_building.html"
+  },
+  {
+    "name": "Background and Anti-Aliasing",
+    "description": "Demonstrates how to change background and anti-aliasing settings.",
+    "ssr": "background.html",
+    "csr": "background.html"
+  },
+  {
+    "name": "Bounding Box",
+    "description": "Demonstrates creating a custom markup item to act as a bounding box.",
+    "ssr": "bounding_box.html",
+    "csr": "bounding_box.html"
+  },
+  {
+    "name": "Capping Geometry Extraction",
+    "description": "Demonstrates the extraction of capping geometry.",
+    "ssr": "capping_retrieval.html",
+    "csr": "capping_retrieval.html"
+  },
+  {
+    "name": "Custom Cutting",
+    "description": "Demonstrates creating a cutting plane with an arbitrary orientation.",
+    "ssr": "custom_cutting.html",
+    "csr": "custom_cutting.html"
+  },
+  {
+    "name": "Custom Redline",
+    "description": "Demonstrates creating a custom redline markup item.",
+    "ssr": "custom_redline.html",
+    "csr": "custom_redline.html"
+  },
+  {
+    "name": "Cutting",
+    "description": "Demonstrates cutting section functionality.",
+    "ssr": "cutting.html",
+    "csr": "cutting.html"
+  },
+  {
+    "name": "Events",
+    "description": "Demonstrates the use of callbacks triggered by the viewer.",
+    "ssr": "events.html",
+    "csr": "events.html"
+  },
+  {
+    "name": "Focus Management",
+    "description": "Demonstrates multiple viewers on a single page and managing keyboard input between the two.",
+    "ssr": "focus_input.html",
+    "csr": "focus_input.html"
+  },
+  {
+    "name": "Geometry Insertion",
+    "description": "Demonstrates how to insert geometry into the scene from the client.",
+    "ssr": "geometry_insertion.html",
+    "csr": "geometry_insertion.html"
+  },
+  {
+    "name": "Geometry Retrieval",
+    "description": "Demonstrates how to fetch the geometry data belonging to a node.",
+    "ssr": "geometry_retrieval.html",
+    "csr": "geometry_retrieval.html"
+  },
+  {
+    "name": "Handles",
+    "description": "Demonstrates how to insert arbitrarily oriented handles.",
+    "ssr": "handles.html",
+    "csr": "handles.html"
+  },
+  {
+    "name": "Level Of Detail",
+    "description": "Demonstrates LOD (Level Of Detail) initial selection and switch.",
+    "ssr": "level_of_detail.html",
+    "csr": "level_of_detail.html"
+  },
+  {
+    "name": "Markup Export",
+    "description": "Demonstrates exporting custom markup with the markup manager.",
+    "ssr": "markup_export.html",
+    "csr": "markup_export.html"
+  },
+  {
+    "name": "Markup Shapes",
+    "description": "Demonstrates creating markup shapes with operators.",
+    "ssr": "markup_shapes.html",
+    "csr": "markup_shapes.html"
+  },
+  {
+    "name": "Materials",
+    "description": "Demonstrates setting color, transparency, and visibility for parts of a model.",
+    "ssr": "material.html",
+    "csr": "material.html"
+  },
+  {
+    "name": "Mesh Replace",
+    "description": "Demonstrates changing the mesh data.",
+    "ssr": "mesh_replace.html",
+    "csr": "mesh_replace.html"
+  },
+  {
+    "name": "Minimal",
+    "description": "Demonstrates a minimal web viewer example.",
+    "ssr": "minimal.html",
+    "csr": "minimal.html"
+  },
+  {
+    "name": "Model Switching",
+    "description": "Demonstrates how to clear the whole existing scene and switch to another model.",
+    "ssr": "switch_model.html",
+    "csr": "switch_model.html"
+  },
+  {
+    "name": "Multiple Instance",
+    "description": "Demonstrates how to create a mesh instance from a part.",
+    "ssr": "multiple_instance.html",
+    "csr": "multiple_instance.html"
+  },
+  {
+    "name": "Multiple Views",
+    "description": "Demonstrates how to create multiple views into a single model",
+    "ssr": "multi_view.html",
+    "csr": "multi_view.html"
+  },
+  {
+    "name": "Multiple Views With Draw Mode Override",
+    "description": "Demonstrates how to create multiple views into a single model with draw mode override",
+    "ssr": "multi_view_draw_mode_override.html",
+    "csr": "multi_view_draw_mode_override.html"
+  },
+  {
+    "name": "Operator Modifiers",
+    "description": "Demonstrates how to customize modifiers for built in operators.",
+    "ssr": "operator_modifier.html",
+    "csr": "operator_modifier.html"
+  },
+  {
+    "name": "Overlays",
+    "description": "Demonstrates how to use the various types of overlays.",
+    "ssr": "overlay.html",
+    "csr": "overlay.html"
+  },
+  {
+    "name": "Pop Out and Fullscreen",
+    "description": "Demonstrates how to pop out the viewer to a new window and display it as a fullscreen element.",
+    "ssr": "pop_out.html",
+    "csr": "pop_out.html"
+  },
+  {
+    "name": "Selection",
+    "description": "Demonstrates use of the selection callback.",
+    "ssr": "selection.html",
+    "csr": "selection.html"
+  },
+  {
+    "name": "Snapshot",
+    "description": "Demonstrates use of the snapshot method to create clickable thumbnails.",
+    "ssr": "snapshot.html",
+    "csr": "snapshot.html"
+  },
+  {
+    "name": "Simple Snapshot",
+    "description": "Demonstrates use of the snapshot method to create clickable thumbnails.",
+    "ssr": "simple_snapshot.html",
+    "csr": "simple_snapshot.html"
+  },
+  {
+    "name": "Start and Shutdown",
+    "description": "Demonstrates starting and shutting down the viewer without reloading the page.",
+    "ssr": "start_and_shutdown.html",
+    "csr": "start_and_shutdown.html"
+  },
+  {
+    "name": "Streaming Modes",
+    "description": "Demonstrates the different streaming modes available in the viewer.",
+    "ssr": "streaming_modes.html",
+    "csr": "streaming_modes.html"
+  },
+  {
+    "name": "SVG Display",
+    "description": "Demonstrates how to output the current camera view to a 2D SVG and display it in the browser.",
+    "ssr": "svg_display.html",
+    "csr": "svg_display.html"
+  },
+  {
+    "name": "Textures",
+    "description": "Demonstrates swapping textures on instances.",
+    "ssr": "textures.html",
+    "csr": "textures.html"
+  },
+  {
+    "name": "Custom Shaders",
+    "description": "Demonstrates how to use custom shaders.",
+    "csr": "custom_shaders.html"
+  },
+  {
+    "name": "ES Module",
+    "description": "Demonstrates importing HOOPS Web Viewer as an ES Module.",
+    "csr": "esm.html"
+  },
+  {
+    "name": "IIFE",
+    "description": "Demonstrates importing HOOPS Web Viewer as an Immediately Invocated Function Expression.",
+    "csr": "iife.html"
+  },
+  {
+    "name": "UMD",
+    "description": "Demonstrates importing HOOPS Web Viewer as an UMD.",
+    "csr": "umd.html"
+  },
+  {
+    "name": "ES Module Monolith",
+    "description": "Demonstrates importing HOOPS Web Viewer monolith as an ES Module.",
+    "csr": "esm-monolith.html"
+  },
+  {
+    "name": "IIFE Monolith",
+    "description": "Demonstrates importing HOOPS Web Viewer monolith as an Immediately Invocated Function Expression.",
+    "csr": "iife-monolith.html"
+  },
+  {
+    "name": "UMD Monolith",
+    "description": "Demonstrates importing HOOPS Web Viewer monolith as an UMD.",
+    "csr": "umd-monolith.html"
+  }
+]

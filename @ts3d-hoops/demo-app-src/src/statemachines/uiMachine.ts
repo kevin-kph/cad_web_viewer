@@ -1,0 +1,326 @@
+import { assign, createActor, setup } from 'xstate';
+
+export type UiMachineEvent =
+  | {
+      type:
+        | 'setInfoShown'
+        | 'setModelTreeShown'
+        | 'setLayerTreeShown'
+        | 'setViewTreeShown'
+        | 'setSheetListShown'
+        | 'setCadConfigurationListShown'
+        | 'setCuttingPlaneShown'
+        | 'setPropertyPanelShown'
+        | 'setToolsPanelShown'
+        | 'setSettingsPanelShown'
+        | 'setTypesTreeShown'
+        | 'setBcfPanelShown';
+      shown: boolean;
+    }
+  | {
+      type: 'setContextMenuShown';
+      shown: boolean;
+      position?: { x: number; y: number };
+    }
+  | {
+      type: 'setIfcRelationshipView';
+      shown: boolean;
+      enabled: boolean;
+    }
+  | {
+      type: 'setBcfPanelEnabled';
+      enabled: boolean;
+    };
+
+export const uiMachine = setup({
+  types: {
+    context: {} as {
+      leftPanelShown: boolean;
+      rightPanelShown: boolean;
+      modelTreeShown: boolean;
+      layerTreeShown: boolean;
+      viewTreeShown: boolean;
+      sheetListShown: boolean;
+      cadConfigurationListShown: boolean;
+      cuttingPlaneShown: boolean;
+      propertyPanelShown: boolean;
+      ifcRelationshipEnabled: boolean;
+      ifcRelationshipViewShown: boolean;
+      toolsPanelShown: boolean;
+      settingsPanelShown: boolean;
+      infoShown: boolean;
+      contextMenuShown: boolean;
+      contextMenuPosition: { x: number; y: number };
+      typesTreeShown: boolean;
+      bcfPanelShown: boolean;
+      bcfPanelEnabled: boolean;
+    },
+    events: {} as UiMachineEvent,
+  },
+}).createMachine({
+  context: {
+    leftPanelShown: false,
+    rightPanelShown: false,
+    modelTreeShown: false,
+    layerTreeShown: false,
+    viewTreeShown: false,
+    sheetListShown: false,
+    cadConfigurationListShown: false,
+    cuttingPlaneShown: false,
+    propertyPanelShown: false,
+    toolsPanelShown: false,
+    settingsPanelShown: false,
+    infoShown: false,
+    ifcRelationshipEnabled: false,
+    ifcRelationshipViewShown: false,
+    contextMenuShown: false,
+    contextMenuPosition: { x: 0, y: 0 },
+    typesTreeShown: false,
+    bcfPanelShown: false,
+    bcfPanelEnabled: false,
+  },
+  on: {
+    setInfoShown: {
+      actions: assign({
+        infoShown: ({ event }) => event.shown,
+      }),
+    },
+    setModelTreeShown: {
+      actions: assign({
+        modelTreeShown: ({ event }) => event.shown,
+        toolsPanelShown: ({ event, context }) => (event.shown ? false : context.toolsPanelShown),
+        cuttingPlaneShown: ({ event, context }) =>
+          event.shown ? false : context.cuttingPlaneShown,
+        settingsPanelShown: ({ event, context }) =>
+          event.shown ? false : context.settingsPanelShown,
+        leftPanelShown: ({ context, event }) =>
+          context.cuttingPlaneShown ||
+          context.toolsPanelShown ||
+          context.settingsPanelShown ||
+          context.ifcRelationshipViewShown ||
+          event.shown,
+      }),
+    },
+    setLayerTreeShown: {
+      actions: assign({
+        layerTreeShown: ({ event }) => event.shown,
+        viewTreeShown: ({ context, event }) => (event.shown ? false : context.viewTreeShown),
+        typesTreeShown: ({ context, event }) => (event.shown ? false : context.typesTreeShown),
+        sheetListShown: ({ context, event }) => (event.shown ? false : context.sheetListShown),
+        cadConfigurationListShown: ({ context, event }) =>
+          event.shown ? false : context.cadConfigurationListShown,
+        bcfPanelShown: ({ context, event }) => (event.shown ? false : context.bcfPanelShown),
+        rightPanelShown: ({ context, event }) =>
+          context.propertyPanelShown ||
+          context.viewTreeShown ||
+          context.cadConfigurationListShown ||
+          context.typesTreeShown ||
+          context.sheetListShown ||
+          context.bcfPanelShown ||
+          event.shown,
+      }),
+    },
+    setSheetListShown: {
+      actions: assign({
+        sheetListShown: ({ event }) => event.shown,
+        viewTreeShown: ({ context, event }) => (event.shown ? false : context.viewTreeShown),
+        layerTreeShown: ({ context, event }) => (event.shown ? false : context.layerTreeShown),
+        typesTreeShown: ({ context, event }) => (event.shown ? false : context.typesTreeShown),
+        cadConfigurationListShown: ({ context, event }) =>
+          event.shown ? false : context.cadConfigurationListShown,
+        bcfPanelShown: ({ context, event }) => (event.shown ? false : context.bcfPanelShown),
+        rightPanelShown: ({ context, event }) =>
+          context.propertyPanelShown ||
+          context.viewTreeShown ||
+          context.layerTreeShown ||
+          context.cadConfigurationListShown ||
+          context.typesTreeShown ||
+          context.bcfPanelShown ||
+          event.shown,
+      }),
+    },
+    setViewTreeShown: {
+      actions: assign({
+        viewTreeShown: ({ event }) => event.shown,
+        layerTreeShown: ({ context, event }) => (event.shown ? false : context.layerTreeShown),
+        typesTreeShown: ({ context, event }) => (event.shown ? false : context.typesTreeShown),
+        sheetListShown: ({ context, event }) => (event.shown ? false : context.sheetListShown),
+        cadConfigurationListShown: ({ context, event }) =>
+          event.shown ? false : context.cadConfigurationListShown,
+        bcfPanelShown: ({ context, event }) => (event.shown ? false : context.bcfPanelShown),
+        rightPanelShown: ({ context, event }) =>
+          context.propertyPanelShown ||
+          context.layerTreeShown ||
+          context.cadConfigurationListShown ||
+          context.typesTreeShown ||
+          context.sheetListShown ||
+          context.bcfPanelShown ||
+          event.shown,
+      }),
+    },
+    setCadConfigurationListShown: {
+      actions: assign({
+        cadConfigurationListShown: ({ event }) => event.shown,
+        viewTreeShown: ({ context, event }) => (event.shown ? false : context.viewTreeShown),
+        layerTreeShown: ({ context, event }) => (event.shown ? false : context.layerTreeShown),
+        typesTreeShown: ({ context, event }) => (event.shown ? false : context.typesTreeShown),
+        sheetListShown: ({ context, event }) => (event.shown ? false : context.sheetListShown),
+        bcfPanelShown: ({ context, event }) => (event.shown ? false : context.bcfPanelShown),
+        rightPanelShown: ({ context, event }) =>
+          context.propertyPanelShown ||
+          context.layerTreeShown ||
+          context.viewTreeShown ||
+          context.typesTreeShown ||
+          context.sheetListShown ||
+          context.bcfPanelShown ||
+          event.shown,
+      }),
+    },
+    setPropertyPanelShown: {
+      actions: assign({
+        propertyPanelShown: ({ event }) => event.shown,
+        bcfPanelShown: ({ context, event }) => (event.shown ? false : context.bcfPanelShown),
+        rightPanelShown: ({ context, event }) =>
+          context.viewTreeShown ||
+          context.layerTreeShown ||
+          context.cadConfigurationListShown ||
+          context.typesTreeShown ||
+          context.sheetListShown ||
+          context.bcfPanelShown ||
+          event.shown,
+      }),
+    },
+    setIfcRelationshipView: {
+      actions: assign({
+        ifcRelationshipEnabled: ({ event }) => event.enabled,
+        ifcRelationshipViewShown: ({ event }) => event.shown,
+        toolsPanelShown: ({ event, context }) => (event.shown ? false : context.toolsPanelShown),
+        cuttingPlaneShown: ({ event, context }) =>
+          event.shown ? false : context.cuttingPlaneShown,
+        settingsPanelShown: ({ event, context }) =>
+          event.shown ? false : context.settingsPanelShown,
+        leftPanelShown: ({ context, event }) =>
+          context.modelTreeShown ||
+          context.cuttingPlaneShown ||
+          context.toolsPanelShown ||
+          context.settingsPanelShown ||
+          event.shown,
+      }),
+    },
+    setCuttingPlaneShown: {
+      actions: assign({
+        cuttingPlaneShown: ({ event }) => event.shown,
+        modelTreeShown: ({ event, context }) => (event.shown ? false : context.modelTreeShown),
+        toolsPanelShown: ({ event, context }) => (event.shown ? false : context.toolsPanelShown),
+        settingsPanelShown: ({ event, context }) =>
+          event.shown ? false : context.settingsPanelShown,
+        ifcRelationshipViewShown: ({ event, context }) =>
+          event.shown ? false : context.ifcRelationshipViewShown,
+        leftPanelShown: ({ context, event }) =>
+          context.modelTreeShown ||
+          context.toolsPanelShown ||
+          context.settingsPanelShown ||
+          context.ifcRelationshipViewShown ||
+          event.shown,
+      }),
+    },
+    setContextMenuShown: {
+      actions: assign({
+        contextMenuShown: ({ event }) => event.shown,
+        contextMenuPosition: ({ event, context }) => event.position ?? context.contextMenuPosition,
+      }),
+    },
+    setToolsPanelShown: {
+      actions: assign({
+        toolsPanelShown: ({ event }) => event.shown,
+        modelTreeShown: ({ event, context }) => (event.shown ? false : context.modelTreeShown),
+        cuttingPlaneShown: ({ event, context }) =>
+          event.shown ? false : context.cuttingPlaneShown,
+        settingsPanelShown: ({ event, context }) =>
+          event.shown ? false : context.settingsPanelShown,
+        ifcRelationshipViewShown: ({ event, context }) =>
+          event.shown ? false : context.ifcRelationshipViewShown,
+        leftPanelShown: ({ context, event }) =>
+          context.modelTreeShown ||
+          context.cuttingPlaneShown ||
+          context.settingsPanelShown ||
+          context.ifcRelationshipViewShown ||
+          event.shown,
+      }),
+    },
+    setSettingsPanelShown: {
+      actions: assign({
+        settingsPanelShown: ({ event }) => event.shown,
+        modelTreeShown: ({ event, context }) => (event.shown ? false : context.modelTreeShown),
+        cuttingPlaneShown: ({ event, context }) =>
+          event.shown ? false : context.cuttingPlaneShown,
+        toolsPanelShown: ({ event, context }) => (event.shown ? false : context.toolsPanelShown),
+        ifcRelationshipViewShown: ({ event, context }) =>
+          event.shown ? false : context.ifcRelationshipViewShown,
+        leftPanelShown: ({ context, event }) =>
+          context.modelTreeShown ||
+          context.cuttingPlaneShown ||
+          context.toolsPanelShown ||
+          context.ifcRelationshipViewShown ||
+          event.shown,
+      }),
+    },
+    setTypesTreeShown: {
+      actions: assign({
+        typesTreeShown: ({ event }) => event.shown,
+        viewTreeShown: ({ context, event }) => (event.shown ? false : context.viewTreeShown),
+        layerTreeShown: ({ context, event }) => (event.shown ? false : context.layerTreeShown),
+        sheetListShown: ({ context, event }) => (event.shown ? false : context.sheetListShown),
+        cadConfigurationListShown: ({ context, event }) =>
+          event.shown ? false : context.cadConfigurationListShown,
+        bcfPanelShown: ({ context, event }) => (event.shown ? false : context.bcfPanelShown),
+        rightPanelShown: ({ context, event }) =>
+          context.propertyPanelShown ||
+          context.viewTreeShown ||
+          context.layerTreeShown ||
+          context.cadConfigurationListShown ||
+          context.sheetListShown ||
+          context.bcfPanelShown ||
+          event.shown,
+      }),
+    },
+    setBcfPanelShown: {
+      actions: assign({
+        bcfPanelShown: ({ event }) => event.shown,
+        layerTreeShown: ({ context, event }) => (event.shown ? false : context.layerTreeShown),
+        viewTreeShown: ({ context, event }) => (event.shown ? false : context.viewTreeShown),
+        sheetListShown: ({ context, event }) => (event.shown ? false : context.sheetListShown),
+        typesTreeShown: ({ context, event }) => (event.shown ? false : context.typesTreeShown),
+        cadConfigurationListShown: ({ context, event }) =>
+          event.shown ? false : context.cadConfigurationListShown,
+        propertyPanelShown: ({ context, event }) =>
+          event.shown ? false : context.propertyPanelShown,
+        rightPanelShown: ({ context, event }) =>
+          context.propertyPanelShown ||
+          context.viewTreeShown ||
+          context.layerTreeShown ||
+          context.cadConfigurationListShown ||
+          context.typesTreeShown ||
+          context.sheetListShown ||
+          event.shown,
+      }),
+    },
+    setBcfPanelEnabled: {
+      actions: assign({
+        bcfPanelEnabled: ({ event }) => event.enabled,
+        bcfPanelShown: ({ context, event }) => (event.enabled ? context.bcfPanelShown : false),
+        rightPanelShown: ({ context, event }) =>
+          context.propertyPanelShown ||
+          context.viewTreeShown ||
+          context.layerTreeShown ||
+          context.cadConfigurationListShown ||
+          context.typesTreeShown ||
+          context.sheetListShown ||
+          (event.enabled ? context.bcfPanelShown : false),
+      }),
+    },
+  },
+});
+
+export const uiActor = createActor(uiMachine);
+uiActor.start();

@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Multiple Instance Example</title>
+    <meta charset="utf-8" />
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      body {
+        margin: 20px;
+        font-family: Verdana, Arial;
+        font-size: medium;
+      }
+
+      .transformMatrix {
+        padding-bottom: 8px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/multiple_instance.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="viewerContainer" class="example-canvas-small"></div>
+    <p></p>
+    <div id="instanceButton" class="instancing">
+      <div>
+        Select a part then click:
+        <button class="instanceButton" id="instanceButton">Create Instance</button>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="transformMatrix">
+      <label style="padding-right: 2px" for="transformMatrixX">Translate Instance X:</label
+      ><input style="padding-left: 2px" id="transX" value="100.0" step="0.1" />
+    </div>
+    <div class="transformMatrix">
+      <label style="padding-right: 2px" for="transformMatrixY">Translate Instance Y:</label
+      ><input style="padding-left: 2px" id="transY" value="0.0" step="0.1" />
+    </div>
+    <div class="transformMatrix">
+      <label style="padding-right: 2px" for="transformMatrixZ">Translate Instance Z:</label
+      ><input style="padding-left: 2px" id="transZ" value="0.0" step="0.1" />
+    </div>
+
+  </body>
+</html>

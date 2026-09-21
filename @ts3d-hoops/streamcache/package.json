@@ -1,0 +1,15 @@
+{
+  "name": "@ts3d-hoops/streamcache",
+  "version": "0.0.1",
+  "homepage": "https://techsoft3d.com/",
+  "license": "Proprietary",
+  "dependencies": {
+    "bowser": "1.9.4",
+    "@ts3d-hoops/common": "../common",
+    "@ts3d-hoops/sc-engine": "../sc-engine"
+  },
+  "browser": "./hoops-streamcache.iife.js",
+  "module": "./hoops-streamcache.mjs",
+  "main": "./hoops-streamcache.mjs",
+  "typings": "./index.d.ts"
+}

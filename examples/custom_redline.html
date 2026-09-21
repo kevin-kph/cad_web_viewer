@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>Custom Redline Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      #viewSelect {
+        width: 150px;
+      }
+
+      td {
+        vertical-align: top;
+        padding: 10px;
+      }
+
+      #outputText,
+      #inputText {
+        width: 100%;
+        height: 200px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/custom_redline.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/ViewPanel.js">
+    <link rel="modulepreload" crossorigin href="/scripts/utils.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+        </td>
+        <td>
+          <div class="example-div-block" id="viewPanel"></div>
+          <div class="example-div-block">
+            <button id="serializeSelected">Serialize Selected</button>
+          </div>
+          <div class="example-div-block">
+            <div>Output:</div>
+            <textarea id="outputText"></textarea>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="example-div-block">
+            <button id="activateCustomTriangleOperator">Activate Custom Triangle Operator</button>
+            <button id="deactivateCustomTriangleOperator">
+              Deactivate Custom Triangle Operator
+            </button>
+          </div>
+          <div class="example-div-block">Operator Settings:</div>
+          <div class="example-div-block">
+            <label for="defaultStrokeColor">Line Color</label>
+            <input id="defaultStrokeColor" type="color" />
+            <label for="defaultFillColor"></label>Fill Color:
+            <input id="defaultFillColor" type="color" /> <label for="defaultFilled">Filled: </label
+            ><input type="checkbox" id="defaultFilled" />
+          </div>
+        </td>
+        <td>
+          <div class="example-div-block"><button id="loadMarkup">Load Markup:</button></div>
+          <textarea id="inputText"></textarea>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

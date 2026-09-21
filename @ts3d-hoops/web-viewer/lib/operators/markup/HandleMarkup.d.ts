@@ -1,0 +1,75 @@
+import { Point3, Matrix, Color } from '@ts3d-hoops/common';
+import { MeshData } from '../../MeshData';
+import { MarkupItem } from '../../markup';
+import { NodeId, OverlayIndex, HandleType } from '../../types';
+import { IView } from '../../core/IView';
+import { IWebViewer } from '../../core/IWebViewer';
+/** @hidden */
+export declare class HandleMarkup extends MarkupItem {
+    static readonly className = "Communicator.Markup.HandleMarkup";
+    static readonly defaultGroupId = -1;
+    private readonly _viewer;
+    private readonly _meshIds;
+    private static readonly _defaultScale;
+    private static readonly _cylinderRadius;
+    private static readonly _coneBaseRadius;
+    private static readonly _cylinderHeight;
+    private static readonly _capHeight;
+    private static readonly _taperHeight;
+    private static readonly _segmentCount;
+    private static readonly _planeOffset;
+    private static readonly _planeLength;
+    private _scaleModifier;
+    private static readonly _xColor;
+    private static readonly _yColor;
+    private static readonly _zColor;
+    private static readonly _viewPlaneColor;
+    private _id;
+    private _handleData;
+    private readonly _translationFromInitialHandlePosition;
+    private _groupIdRotationMatrix;
+    private _callbacks;
+    constructor(viewer: IWebViewer);
+    remove(view: IView | null): void;
+    private _getAxisMeshData;
+    private _getPlaneMeshData;
+    private _getViewPlaneMeshData;
+    private _getRotateMeshData;
+    setAxisMeshData(meshData: MeshData): Promise<void>;
+    setPlaneMeshData(meshData: MeshData): Promise<void>;
+    setViewPlaneMeshData(meshData: MeshData): Promise<void>;
+    setRotateMeshData(meshData: MeshData): Promise<void>;
+    /**
+     * Gets the associated overlay id
+     */
+    getOverlayId(): OverlayIndex;
+    private _hideOverlay;
+    hideOverlay(): Promise<void>;
+    private _showOverlay;
+    showOverlay(): Promise<void>;
+    private _updateViewport;
+    updateViewport(): Promise<void>;
+    addHandles(position: Point3, scaleModifier: number, groupId: number): Promise<void>;
+    private _updateCamera;
+    getVector(nodeId: NodeId): Point3 | null;
+    getHandleType(nodeId: NodeId): HandleType | null;
+    getHandleGroupId(nodeId: NodeId): number;
+    getPosition(nodeId: NodeId): Point3 | null;
+    getHandleNodeIds(groupId?: number | null): NodeId[];
+    removeHandles(groupId?: number | null): Promise<void>;
+    isEmpty(): boolean;
+    createDefaultHandles(position: Point3, groupId: number): Promise<void>;
+    private _createMeshId;
+    addAxisTranslationHandle(position: Point3, translationAxis: Point3, color: Color, positionNormal: Point3 | null, groupId: number): Promise<NodeId>;
+    addViewPlaneHandle(position: Point3, color: Color, groupId: number): Promise<NodeId>;
+    addPlaneTranslationHandle(position: Point3, planeNormal: Point3, faceColor: Color, lineColor: Color, positionNormal: Point3 | null, groupId: number): Promise<NodeId>;
+    addRotateHandle(position: Point3, rotateAxis: Point3, instanceColor: Color, positionNormal: Point3 | null, groupId: number): Promise<NodeId>;
+    private _getRotationMatrixFromVector;
+    private _createMeshInstance;
+    private _createTransformationMatrix;
+    private _getHandlePosition;
+    getGroupIdRotationMatrix(groupId: number): Matrix;
+    updatePosition(newTranslation: Point3, newRotation: Matrix, finalizePosition: boolean, groupId: number, childrenGroupIds: Map<number, NodeId>): Promise<void>;
+    resetTranslation(): void;
+    getTranslation(): Point3;
+}

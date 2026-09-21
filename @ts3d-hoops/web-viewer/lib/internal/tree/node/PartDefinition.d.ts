@@ -1,0 +1,36 @@
+import { LoadSubtreeConfig } from '../../../types';
+import { NodeMixin } from './NodeMixin';
+import { ProductOccurrence } from './ProductOccurrence';
+import { PartDefinitionBits, PartDefinitionInfo } from './types';
+import { AuthoredNodeId, RuntimeNodeId } from '../NodeId';
+import { ModelKey } from '@ts3d-hoops/streamcache';
+import { InclusionContext } from '../context/InclusionContext';
+import { AssemblyDataParser } from '../load/AssemblyDataParser';
+import { RepresentationItem } from './RepresentationItem';
+import { PhantomMember } from '../../types';
+import { IAssemblyTree } from '../../../core';
+export type PartDefinitionReferrer = ProductOccurrence;
+export declare class PartDefinition extends NodeMixin<PartDefinitionBits> {
+    static parseXml(assemblyTree: IAssemblyTree, elem: Element, config: LoadSubtreeConfig): PartDefinitionInfo;
+    static parseBinary(assemblyTree: IAssemblyTree, parser: AssemblyDataParser, config: LoadSubtreeConfig): PartDefinitionInfo;
+    static reify(assemblyTree: IAssemblyTree, inclusionContextForNodeId: InclusionContext, modelKey: ModelKey, info: PartDefinitionInfo): PartDefinition;
+    static createDynamic(assemblyTree: IAssemblyTree, authoredId: AuthoredNodeId | null, name: string | null): PartDefinition;
+    static createMissing(assemblyTree: IAssemblyTree): PartDefinition;
+    isMissing(): boolean;
+    private constructor();
+    private _loadRepresentationItems;
+    getRuntimeId(): RuntimeNodeId;
+    getInclusionContextForNodeId(): InclusionContext;
+    addReferrer(referrer: PartDefinitionReferrer): void;
+    createRepItem(assemblyTree: IAssemblyTree, authoredId: AuthoredNodeId | null): RepresentationItem;
+    private _addRepresentationItem;
+    getRepresentationItems(): RepresentationItem[];
+    getReferrers(): PartDefinitionReferrer[];
+    removeAllReferrers(): void;
+    getModelKey(): ModelKey;
+    protected readonly __PartDefinition: PhantomMember;
+    private readonly _inclusionContextForNodeId;
+    private readonly _modelKey;
+    private _referrers;
+    private _repItems;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@ts3d-hoops/web-viewer-monolith",
+  "version": "0.0.1",
+  "homepage": "https://techsoft3d.com/",
+  "type": "module",
+  "license": "Proprietary",
+  "dependencies": {
+    "@ts3d-hoops/streamcache": "../streamcache",
+    "@ts3d-hoops/web-viewer": "../web-viewer"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./hoops-web-viewer-monolith.js"
+    }
+  },
+  "browser": "./hoops-web-viewer-monolith.iife.js",
+  "module": "./hoops-web-viewer-monolith.js",
+  "main": "./hoops-web-viewer-monolith.js",
+  "typings": "./index.d.ts"
+}

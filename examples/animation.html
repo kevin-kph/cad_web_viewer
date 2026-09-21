@@ -1,0 +1,192 @@
+<html>
+  <head>
+    <title>Animation Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style>
+      .viewer-and-controls {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .animation-ui {
+        position: relative;
+        flex-grow: 0;
+        background-color: white;
+      }
+
+      .playback-controls {
+        display: flex;
+        padding: 5px;
+        flex-grow: 1;
+      }
+
+      .frame-box {
+        flex-grow: 0;
+        width: 50px;
+      }
+
+      .channel-entry {
+        border: 1px solid black;
+        margin-bottom: 5px;
+      }
+
+      .channel-name {
+        width: 200px;
+        text-overflow: ellipsis;
+      }
+
+      .keyframe {
+        padding-right: 2px;
+        padding-left: 2px;
+        border: 1px solid black;
+        margin-right: 3px;
+      }
+
+      .color-and-opacity-settings {
+        display: flex;
+        padding: 5px;
+        flex-grow: 0;
+      }
+
+      .keyframe-buttons {
+        display: flex;
+        padding: 5px;
+        flex-grow: 1;
+      }
+
+      .import-export {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .import-export > div {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 0;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/animation.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="content">
+      <div class="viewer-and-controls">
+        <div id="viewerContainer" class="example-canvas-small" style="flex-grow: 0"></div>
+        <div class="animation-ui">
+          <div class="playback-controls">
+            <input id="frame-box" type="number" step="0.03" value="0" class="frame-box" /> /
+            <input id="frame-count-box" type="number" step="1" value="4" class="frame-box" />
+            <button id="play-button" style="flex-grow: 0">Play</button>
+            <button id="pause-button" style="flex-grow: 0">Pause</button>
+            <button id="stop-button" style="flex-grow: 0">Stop</button>
+            <input
+              id="timeline-slider"
+              type="range"
+              min="0.0"
+              max="4.0"
+              step="0.03"
+              value="0"
+              style="flex-grow: 1"
+            />
+          </div>
+
+          <div id="settings">
+            <label for="loop-box">Loop: </label
+            ><input id="loop-box" type="number" min="-1" step="1" value="-1" style="width: 50px" />
+            <label for="tick-time" title="The amount of time in between animation system updates"
+              >Manager Tick MS: </label
+            ><input id="tick-time" type="number" min="16" step="1" value="50" style="width: 50px" />
+            <label
+              for="animation-time-scale"
+              title="The number of milliseconds equal to relative animation time T=1"
+              >Animation Speed:</label
+            ><input
+              id="animation-time-scale"
+              value="1"
+              step="0.25"
+              type="number"
+              style="width: 50px"
+            />
+          </div>
+
+          <div id="keyframe-types">
+            <label for="translate-checkbox">Translate</label>
+            <input id="translate-checkbox" name="Translation" type="checkbox" checked="checked" />
+            <label for="rotate-checkbox">Rotate</label>
+            <input id="rotate-checkbox" name="Rotation" type="checkbox" checked="checked" />
+            <label for="opacity-checkbox">Opacity</label>
+            <input id="opacity-checkbox" name="Opacity" type="checkbox" />
+            <label for="visibility-checkbox">Visibility</label>
+            <input id="visibility-checkbox" name="Visibility" type="checkbox" />
+            <label for="color-checkbox">Color</label>
+            <input id="color-checkbox" name="Color" type="checkbox" />
+          </div>
+
+          <div id="color-and-opacity-settings" class="color-and-opacity-settings">
+            <label for="color-input">Color</label>
+            <input id="color-input" type="color" value="#FF0000" />
+            <label for="opacity-input">Opacity</label>
+            <input id="opacity-input" type="number" value="1.0" min="0.0" max="1.0" step="0.1" />
+            <button id="set-color-button">Set Node Color</button>
+            <button id="set-opacity-button">Set Node Opacity</button>
+            <button id="toggle-visibility-button">Toggle Node Visibility</button>
+            <button id="reset-visibilities-button">Reset All Visibilities</button>
+          </div>
+
+          <div id="keyframe-buttons" class="keyframe-buttons">
+            <button id="keyframe-node-button" style="flex-grow: 0">Keyframe Node</button>
+            <button id="keyframe-camera-button" style="flex-grow: 0">Keyframe Camera</button>
+          </div>
+
+          <div id="channel-box"></div>
+        </div>
+      </div>
+      <div id="instructions" style="width: 50%">
+        <p>
+          Instructions: Create keyframes at different times using the controls at the top right then
+          play them back as an animation. For example, click a node with the time at the upper right
+          set to 0. Then press "Keyframe Node" with the node you want to keyframe selected. Then
+          move the time forward, reselect and translate the node with the handles, and keyframe it
+          again. Press the play button and you should see the node move between the two locations
+          you provided.
+        </p>
+        <p>
+          You can also keyframe color, opacity, and visibility state so long as their checkboxes are
+          checked. To change the color of a node, set the color you want to use in the color
+          selector, then select the node whose color you want to set and press the "Set Node Color"
+          button. A similar process can be followed for opacity.
+        </p>
+        <p>
+          You can also import and export your animations. To demonstrate: create an animation then
+          press the "Export JSON" button. Copy the resulting text from the text box below the
+          button. Delete your animation or refresh the page. You can paste your JSON into the input
+          textbox and press "Import JSON" to import the animation.
+        </p>
+      </div>
+      <div class="import-export">
+        <div id="import-area">
+          <button id="import-button">Import JSON</button>
+          <textarea id="import-textarea" rows="20" cols="40"></textarea>
+        </div>
+        <div id="export-area">
+          <button id="export-button">Export JSON</button>
+          <textarea id="export-textarea" rows="20" cols="40"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

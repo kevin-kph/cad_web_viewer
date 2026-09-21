@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Client Side Geometry Insertion</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      body {
+        padding: 10px;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/geometry_insertion.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/utils.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <div id="viewerContainer" class="example-canvas-small"></div>
+    <div>
+      <div class="example-div-block">
+        <label for="operatorMode">Mode: </label>
+        <select id="operatorMode">
+          <option value="0" selected="selected">Insert</option>
+          <option value="1">Select</option>
+        </select>
+      </div>
+      <div class="example-div-block operator-div mode-insert">
+        <h4>Click the plane to add a cube into the scene.</h4>
+        <p>Create Cube Instance:</p>
+        <div class="example-div-block">
+          <label for="geometryStyle">Style:</label>
+          <select id="geometryStyle">
+            <option value="0" selected>Faces and Lines</option>
+            <option value="1">Faces Only</option>
+            <option value="2">Lines Only</option>
+            <option value="3">Points</option>
+          </select>
+        </div>
+        <div>
+          <div class="example-div-block">
+            <label for="geometrySize">Geometry Size:</label
+            ><input id="geometrySize" value="1.0" min="0.1" step="0.1" />
+          </div>
+          <div class="example-div-block">
+            <label for="geometryColor">Geometry Color:</label
+            ><input id="geometryColor" type="color" value="#00FF00" />
+          </div>
+          <div class="example-div-block">
+            <label for="lineColor">Line Color:</label
+            ><input id="lineColor" type="color" value="#00FF00" />
+          </div>
+          <div class="example-div-block">
+            <label for="pointColor">Point Color:</label
+            ><input id="pointColor" type="color" value="#00FF00" />
+          </div>
+        </div>
+      </div>
+      <div class="example-div-block operator-div mode-select" style="display: none">
+        <h4>Click an inserted cube to select it. Press delete to remove it from the scene.</h4>
+      </div>
+    </div>
+
+  </body>
+</html>

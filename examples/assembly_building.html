@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Assembly building Example</title>
+
+    <link rel="icon" type="image/svg" href="/images/hcfavicon.svg" />
+
+    <style type="text/css">
+      table td {
+        vertical-align: top;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@ts3d-hoops/web-viewer": "./hoops-web-viewer.mjs"
+        }
+      }
+    </script>
+
+    
+    <script type="module" crossorigin src="/scripts/examples/assembly_building.js"></script>
+    <link rel="modulepreload" crossorigin href="/scripts/WebViewer.js">
+    <link rel="modulepreload" crossorigin href="/scripts/index.js">
+    <link rel="modulepreload" crossorigin href="/scripts/modelTree.js">
+    <link rel="stylesheet" crossorigin href="/styles/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="modelTree"></div>
+        </td>
+        <td>
+          <div id="viewerContainer" class="example-canvas-small"></div>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <div class="example-div-block">
+            <div>
+              <button id="loadMicroEngine">micro engine</button>
+              <label>
+                Load "micro engine" on selected node (uses Model.loadSubtreeFromModel())</label
+              >
+            </div>
+            <div>
+              <button id="createEmptyNode">empty node</button>
+              <label> Create an empty node on selected node (uses Model.createNode())</label>
+            </div>
+            <div>
+              <button id="ShiftX-">X -</button>
+              <button id="ShiftX+">X +</button>
+              <button id="ShiftY-">Y -</button>
+              <button id="ShiftY+">Y +</button>
+              <button id="ShiftZ-">Z -</button>
+              <button id="ShiftZ+">Z +</button>
+              <label> Move selected node</label>
+            </div>
+            <div>
+              <button id="clearScene">clear scene</button>
+              <label> Clear scene (uses Model.clear())</label>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

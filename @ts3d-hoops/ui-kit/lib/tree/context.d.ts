@@ -1,0 +1,16 @@
+import { TreeContext } from './types';
+/**
+ * We use this structure to Wrap the context into a literal object to simplify
+ * reassignment.
+ *
+ * @typedef {ContextWrapper}
+ */
+export type ContextWrapper = {
+    context: TreeContext;
+};
+/**
+ * The context that we will provide to our tree nodes
+ */
+export declare const treeContext: {
+    __context__: ContextWrapper;
+};
